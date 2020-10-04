@@ -3,10 +3,12 @@ const bodyParser = require('body-parser');
 const ejs = require('ejs');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const flash = require('connect-flash');
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
 const http = require('http');
 const socketIo = require('socket.io');
+const passport = require('passport');
 const container = require("./container");
 
 container.resolve(function(users, _){
@@ -40,11 +42,23 @@ container.resolve(function(users, _){
 
     function configureExpress(app){
 
+        require('./passport/signup');
+        require('./passport/login');
+
         app.use(express.static('public'));
         app.use(cookieParser());
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({ extended: true}));
         app.set('view engine', 'ejs');
+        app.use(session({
+            resave: true,
+            saveUninitialized: true,
+            secret: "hey",
+            store: new MongoStore({ mongooseConnection: mongoose.connection})
+        }))
+        app.use(flash());
+        app.use(passport.initialize());
+        app.use(passport.session());
         app.locals._ = _;
     }
 })

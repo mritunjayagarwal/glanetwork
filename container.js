@@ -3,7 +3,9 @@ const path = require('path');
 const container = dependable.container();
 const myModules = [
     ['_', 'lodash'],
-    ['News', './models/news']
+    ['News', './models/news'],
+    ['User', './models/user'],
+    ['passport', 'passport']
 ];
 
 myModules.forEach(function(val){
