@@ -45,8 +45,16 @@
                                 <div class="card-header"><%= feed.title %></div>
                                 <div class="card-body">
                                 <p class="card-text"><%= feed.content %></p>
-                                <a href="/like/<%= feed._id %>" class="card-link"><i class="fi-xwluxl-heart-wide"></i> <%= feed.likes %></a>
-                                <a href="/comment/<%= feed._id %>" class="card-link"><i class="fi-xwluxl-comment-square-dots-wide"></i> <%= feed.comments %></a>
+                                <% if(user){ %>
+                                    <% if(feed.likes == user.username){ %>
+                                      <a href="/like/<%= user.username %>/<%= feed._id %>" class="card-link"><i class="fi-xwluxl-heart-solid"></i> <%= feed.likes.length %></a>
+                                    <% }else{ %>
+                                      <a href="/like/<%= user.username %>/<%= feed._id %>" class="card-link"><i class="fi-xwluxl-heart-wide"></i> <%= feed.likes.length %></a>
+                                    <% } %>
+                                  <!-- <a href="/like/<%= user.username %>/<%= feed._id %>" class="card-link"><i class="fi-xwluxl-heart-wide"></i> <%= feed.likes.length %></a> -->
+                                  <a href="/comment/<%= user.username %>/<%= feed._id %>" class="card-link"><i class="fi-xwluxl-comment-square-dots-wide"></i> <%= feed.comments %></a>
+                                <% } %>
+                               
                                 </div>
                             </div>
                           <% }) %>

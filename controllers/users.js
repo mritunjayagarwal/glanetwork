@@ -3,8 +3,8 @@ module.exports = function(News, User, passport){
         SetRouting: function(router){
             router.get('/', this.home);
             router.get('/upload', this.uploadNews);
-            router.get('/like/:id', this.like);
-            router.get('/comment/:id', this.comment);
+            router.get('/like/:username/:id', this.like);
+            router.get('/comment/:username/:id', this.comment);
             router.get('/logout', this.logout);
 
             router.post('/upload', this.upload);
@@ -12,7 +12,7 @@ module.exports = function(News, User, passport){
             router.post('/login', this.getInside);
         },
         home: async function(req, res){
-            const news = await News.find({}).sort("-submitted").exec();
+            const news = await News.find({}).sort("-submitted").populate({ path: 'likes.owner', model: 'User'}).exec();
             var errors = req.flash('error');
             res.render("index", { user: req.user, feeds: news, errors: errors, hasErrors: errors.length > 0});
         },
@@ -27,16 +27,65 @@ module.exports = function(News, User, passport){
                 res.redirect('/');
             });
         },
-        like: function(req, res){
-            News.updateOne({
-                _id: req.params.id
-            }, {
-                $inc: {
-                    likes: +1
+        like: async function(req, res){
+            if(req.user){
+                if(req.user.username == req.params.username){
+                    News.findOne({ _id: req.params.id, 'likes.owner':req.user._id}, (err, news) => {
+                        if(news){
+                            console.log("Reached");
+                            News.updateOne({
+                                _id: req.params.id,
+                                'likes.owner': req.user._id
+                            }, {
+                                $pull: {
+                                    likes: { owner: req.user._id}
+                                }
+                            }, () => {
+                                console.log("Deleted");
+                            });
+
+                            User.updateOne({
+                                _id: req.user._id,
+                                'liked.post': req.params.id
+                            }, {
+                                $pull: {
+                                    liked: { post: req.params.id}
+                                }
+                            }, (err) => {
+                                console.log("Deleted user like");
+                                res.redirect('back');
+                            })
+                        }else{
+                            console.log("Hey")
+                            News.updateOne({
+                                _id: req.params.id,
+                                'likes.owner': { $ne: req.user._id}
+                            }, {
+                                $push: {
+                                    likes: { owner: req.user._id}
+                                }
+                            },(err) => {
+                                console.log("Updated Like")
+                            });
+        
+                            User.updateOne({
+                                _id: req.user._id,
+                                'liked.post': { $ne: req.params.id}
+                            }, {
+                                $push: {
+                                    liked: { post: req.params.id}
+                                }
+                            }, () => {
+                                res.redirect('back');
+                            });
+                        }
+                    })
+                }else{
+                    res.redirect('back');
                 }
-            }, () => {
-                res.redirect('back');
-            });
+            }else{
+                res.redirect('/');
+            }
         },
         comment: function(req, res){
             News.updateOne({

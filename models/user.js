@@ -5,6 +5,12 @@ const bcrypt = require("bcrypt-nodejs");
 const userSchema = new Schema({
     username: { type: String, lowercase: true, required: true},
     password: { type: String, required: true},
+    liked: [
+        {
+            post: { type: Schema.Types.ObjectId, ref: 'News'},
+            likeon: { type: Date, default: Date.now},
+        }
+    ],
     created: { type: Date, default: Date.now}
 });
 
