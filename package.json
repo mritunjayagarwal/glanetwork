@@ -4,7 +4,7 @@
   "description": "A social network",
   "main": "server.js",
   "engines": {
-    "node": "7.10.1",
+    "node": "*",
     "npm": "6.4.1"
   },
   "scripts": {
