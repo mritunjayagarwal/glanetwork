@@ -36,30 +36,40 @@
                 <% } %>
                 <section class="content">
                     <div class = "row">
-                        <div class = "col-md-2">
- 
+                        <div class = "col-md-3">
+                          <!-- <div class="list-group ">
+                            <a href="#" class="list-group-item list-group-item-action active">Dashboard</a>
+                            <a href="#" class="list-group-item list-group-item-action">User Management</a>
+                            <a href="#" class="list-group-item list-group-item-action">Used</a>
+                            <a href="#" class="list-group-item list-group-item-action">Enquiry</a>
+                            <a href="#" class="list-group-item list-group-item-action">Dealer</a>
+                            <a href="#" class="list-group-item list-group-item-action">Media</a>
+                            <a href="#" class="list-group-item list-group-item-action">Post</a>
+                            <a href="#" class="list-group-item list-group-item-action">Category</a>
+                            <a href="#" class="list-group-item list-group-item-action">New</a>
+                            <a href="#" class="list-group-item list-group-item-action">Comments</a>
+                            <a href="#" class="list-group-item list-group-item-action">Appearance</a>
+                            <a href="#" class="list-group-item list-group-item-action">Reports</a>
+                            <a href="#" class="list-group-item list-group-item-action">Settings</a>
+                          </div> --> 
                         </div>
-                        <div class = "col-md-8">
+                        <div class = "col-md-6">
                           <% _.forEach(feeds, (feed) => { %>  
-                            <div class="card mb-2">
+                            <a href="/news/show/<%= feed._id %>">
+                              <div class="card mb-2">
                                 <div class="card-header"><%= feed.title %></div>
                                 <div class="card-body">
                                 <p class="card-text"><%= feed.content %></p>
                                 <% if(user){ %>
-                                    <% if(feed.likes == user.username){ %>
-                                      <a href="/like/<%= user.username %>/<%= feed._id %>" class="card-link"><i class="fi-xwluxl-heart-solid"></i> <%= feed.likes.length %></a>
-                                    <% }else{ %>
-                                      <a href="/like/<%= user.username %>/<%= feed._id %>" class="card-link"><i class="fi-xwluxl-heart-wide"></i> <%= feed.likes.length %></a>
-                                    <% } %>
-                                  <!-- <a href="/like/<%= user.username %>/<%= feed._id %>" class="card-link"><i class="fi-xwluxl-heart-wide"></i> <%= feed.likes.length %></a> -->
+                                  <a href="/like/<%= user.username %>/<%= feed._id %>" class="card-link"><i class="fi-xwluxl-heart-wide"></i> <%= feed.likes.length %></a>
                                   <a href="/comment/<%= user.username %>/<%= feed._id %>" class="card-link"><i class="fi-xwluxl-comment-square-dots-wide"></i> <%= feed.comments %></a>
                                 <% } %>
-                               
                                 </div>
                             </div>
+                            </a>
                           <% }) %>
                             </div>
-                        <div class = "col-md-2">
+                        <div class = "col-md-3">
                             
                         </div>
                     </div>

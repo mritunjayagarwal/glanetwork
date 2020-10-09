@@ -6,7 +6,8 @@ const myModules = [
     ['News', './models/news'],
     ['User', './models/user'],
     ['passport', 'passport'],
-    ['async', 'async']
+    ['async', 'async'],
+    ['moment', 'moment']
 ];
 
 myModules.forEach(function(val){

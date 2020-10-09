@@ -1,15 +1,25 @@
 module.exports = function(News, User, passport){
     return {
         SetRouting: function(router){
-            router.get('/', this.home);
+            router.get('/', this.indexpage);
+            router.get('/home', this.home);
             router.get('/upload', this.uploadNews);
             router.get('/like/:username/:id', this.like);
             router.get('/comment/:username/:id', this.comment);
             router.get('/logout', this.logout);
+            router.get('/authenticate', this.authenticate);
 
             router.post('/upload', this.upload);
             router.post('/create', this.createAccount);
             router.post('/login', this.getInside);
+        },
+        indexpage: async function(req, res){
+            if(req.user){
+                res.redirect('/home');
+            }else{
+                var errors = req.flash('error');
+                res.render("authenticate", { user: req.user, errors: errors, hasErrors: errors.length > 0});
+            }
         },
         home: async function(req, res){
             const news = await News.find({}).sort("-submitted").populate({ path: 'likes.owner', model: 'User'}).exec();
@@ -32,7 +42,6 @@ module.exports = function(News, User, passport){
                 if(req.user.username == req.params.username){
                     News.findOne({ _id: req.params.id, 'likes.owner':req.user._id}, (err, news) => {
                         if(news){
-                            console.log("Reached");
                             News.updateOne({
                                 _id: req.params.id,
                                 'likes.owner': req.user._id
@@ -56,7 +65,6 @@ module.exports = function(News, User, passport){
                                 res.redirect('back');
                             })
                         }else{
-                            console.log("Hey")
                             News.updateOne({
                                 _id: req.params.id,
                                 'likes.owner': { $ne: req.user._id}
@@ -104,13 +112,16 @@ module.exports = function(News, User, passport){
             failureFlash: true
         }),
         getInside: passport.authenticate('local.login', {
-            successRedirect: 'back',
+            successRedirect: '/',
             failureRedirect: 'back',
             failureFlash: true
         }),
         logout: function(req, res){
             req.logout();
             res.redirect('/');
+        },
+        authenticate: function(req, res){
+            res.render('authenticate')
         }
     }
 }

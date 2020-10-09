@@ -10,8 +10,9 @@ const http = require('http');
 const socketIo = require('socket.io');
 const passport = require('passport');
 const container = require("./container");
+const news = require('./controllers/news');
 
-container.resolve(function(users, _){
+container.resolve(function(users, news, _){
 
     const app = showExpress();
 
@@ -31,6 +32,7 @@ container.resolve(function(users, _){
 
         const router = require('express-promise-router')();
         users.SetRouting(router);
+        news.SetRouting(router);
 
         app.use(router);
 
