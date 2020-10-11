@@ -1,7 +1,9 @@
-module.exports = function(News, moment){
+module.exports = function(News, Comment, moment){
     return {
         SetRouting: function(router){
             router.get('/news/show/:id', this.showNews);
+
+            router.post('/comment/news/:id', this.newsComment);
         },
         showNews: async function(req, res){
             await News.updateOne({
@@ -11,9 +13,32 @@ module.exports = function(News, moment){
                     views: +1
                 }
             });
-            const news = await News.findOne({ _id: req.params.id}).exec();
+            const news = await News.findOne({ _id: req.params.id}).populate({ path: 'comments.comment', model: 'Comment'}).exec();
+            console.log(news);
             var errors = req.flash('error');
-            res.render('news', { user: req.user, errors: errors, hasErrors: errors.length > 0, news: news, moment: moment});
+            res.render('news', { user: req.user, errors: errors, hasErrors: errors.length > 0, news: news, moment: moment, comments: news.comments});
+        },
+        newsComment: async function(req, res){
+
+            const newComment = new Comment();
+            newComment.news = req.params.id;
+            newComment.content = req.body.content;
+            newComment.save(function(){
+                console.log("Commented Succesfully");
+            });
+
+            News.updateOne({
+                _id: req.params.id
+            }, {
+                $push: {
+                    comments: {
+                        comment: newComment._id
+                    }
+                }
+            }, () => {
+                console.log("News Update Successfully");
+                res.redirect('back');
+            })
         }
     }
 }

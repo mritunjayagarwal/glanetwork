@@ -12,7 +12,12 @@ const newsSchema = new Schema({
             likedon: { type: Date, default: Date.now},
         }
     ],
-    comments: { type: Number, default: 0}
+    comments: [
+        {
+            comment: { type: Schema.Types.ObjectId, ref: 'Comment'},
+            commentedon: { type: Date, default: Date.now}
+        }
+    ]
 });
 
 module.exports = mongoose.model('News', newsSchema);
