@@ -63,27 +63,23 @@
                           <!-- Post Content -->
                           <p style = "font-size: 20px;"><%= news.content %></p>
 
-                          <hr>
-                  
-                          <!-- Comments Form -->
-                          <div class="card my-4">
-                            <h5 class="card-header">Leave a Comment:</h5>
-                            <div class="card-body">
+                          <center><hr width = 250></center>
+
+                            <div>
                               <form action = "/comment/news/<%= news._id %>" method = "POST">
                                 <div class="form-group">
-                                  <textarea class="form-control" name = "content" rows="3"></textarea>
+                                  <textarea class="form-control" name = "content" rows="2" placeholder = "Comment your views"></textarea>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary mb-4">Submit</button>
                               </form>
                             </div>
-                          </div>
                   
                           <!-- Single Comment -->
                           <% for(const comment of comments.reverse()){%>
-                            <div class="media mb-4">
+                            <div class="media mb-3">
                               <img class="d-flex mr-3 rounded-circle" src="https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png" alt="" style = "width: 50px;height: auto;">
                               <div class="media-body">
-                                <h5 class="mt-0">Anonymous <span class = "pull-right"><%= moment(comment.comment.commentedon).calendar(); %></span></h5>
+                                <h5 class="mt-0">Anonymous <span class = "pull-right" style = "font-size: 15px;"><%= moment(comment.comment.commentedon).calendar(); %></span></h5>
                                 <p><%= comment.comment.content %></p>
                               </div>
                             </div> 

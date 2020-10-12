@@ -59,10 +59,10 @@
                               <div class="card mb-2">
                                 <div class="card-header"><%= feed.title %></div>
                                 <div class="card-body">
-                                <p class="card-text"><%= feed.content %></p>
+                                <!-- <p class="card-text"><%= feed.content %></p> -->
                                 <% if(user){ %>
                                   <a href="/like/<%= user.username %>/<%= feed._id %>" class="card-link"><i class="fi-xwluxl-heart-wide"></i> <%= feed.likes.length %></a>
-                                  <a href="/comment/<%= user.username %>/<%= feed._id %>" class="card-link"><i class="fi-xwluxl-comment-square-dots-wide"></i> <%= feed.comments %></a>
+                                  <a href="/comment/<%= user.username %>/<%= feed._id %>" class="card-link"><i class="fi-xwluxl-comment-square-dots-wide"></i> <%= feed.comments.length %></a>
                                 <% } %>
                                 </div>
                             </div>
