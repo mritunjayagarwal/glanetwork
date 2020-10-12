@@ -14,13 +14,13 @@ module.exports = function(News, Comment, moment){
                 }
             });
             const news = await News.findOne({ _id: req.params.id}).populate({ path: 'comments.comment', model: 'Comment'}).exec();
-            console.log(news);
             var errors = req.flash('error');
             res.render('news', { user: req.user, errors: errors, hasErrors: errors.length > 0, news: news, moment: moment, comments: news.comments});
         },
         newsComment: async function(req, res){
 
-            const newComment = new Comment();
+            if(req.body.content != ""){
+                const newComment = new Comment();
             newComment.news = req.params.id;
             newComment.content = req.body.content;
             newComment.save(function(){
@@ -39,6 +39,10 @@ module.exports = function(News, Comment, moment){
                 console.log("News Update Successfully");
                 res.redirect('back');
             })
+            }else{
+                res.redirect('back')
+            }
+            
         }
     }
 }
