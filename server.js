@@ -56,6 +56,9 @@ container.resolve(function(users, news, _){
             resave: true,
             saveUninitialized: true,
             secret: "hey",
+            cookie : {
+                maxAge: 1000* 60 * 60 *24 * 365
+            },
             store: new MongoStore({ mongooseConnection: mongoose.connection})
         }))
         app.use(flash());
