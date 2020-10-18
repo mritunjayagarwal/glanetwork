@@ -60,13 +60,15 @@
                             <% _.forEach(feeds, (feed) => { %>  
                               <a href="/news/show/<%= feed._id %>">
                                 <div class="card mb-2" background>
-                                  <div class="no-border text-uppercase px-4 pb-1 pt-4" style = "color: #303030;font-size: 18px;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif"><%= feed.title %></div>
+                                  <div class="no-border text-uppercase px-3 pt-3" style = "color: #303030;font-size: 16px;font-family: Arial, Helvetica, sans-serif;font-weight: bold"><%= feed.title %></div>
+                                  <span class = "pull-left no-border px-3 pb-0 mt-2" style = "color: #505050; font-weight: bolder; font-size: 12px;"><i class = "fa fa-clock"></i> <%= moment(feed.submitted).format("lll") %></span>
                                   <div class="card-body">
                                   <!-- <p class="card-text"><%= feed.content %></p> -->
                                   <% if(user){ %>
-                                    <a href="/like/<%= user.username %>/<%= feed._id %>" class="card-link"><i class="fi-xwluxl-heart-solid" style = "color: #e31b23;font-size: 20px;"></i> <%= feed.likes.length %></a>
-                                    <a href="" class="card-link"><i class="fi-xnsuxl-eye-solid" style = "color: #808080"></i> <%= feed.views %></a>
-                                    <a href="/news/show/<%= feed._id %>" class="card-link"><i class="fi-xnsuxl-comment-square-dot-solid" style = "color: #808080"></i> <%= feed.comments.length %></a>
+                                    <a href="/like/<%= user.username %>/<%= feed._id %>" class="card-link"><i class="fi-xwluxl-heart-solid" style = "color: #e31b23;font-size: 20px;margin-left: -5px;"></i> <%= feed.likes.length %></a>
+                                    <a href="" class="card-link"><i class="fi-xnsuxl-eye-solid" style = "color: #606060"></i> <%= feed.views %></a>
+                                    <a href="/news/show/<%= feed._id %>" class="card-link"><i class="fi-xnsuxl-comment-square-dot-solid" style = "color: #606060"></i> <%= feed.comments.length %></a>
+                                    <span class = "pull-right" style = "color: #606060;margin-top: 5px;font-weight: bolder;"><%= moment(feed.submitted).fromNow() %></span>
                                   <% } %>
                                   </div>
                               </div>

@@ -1,4 +1,4 @@
-module.exports = function(News, User, passport){
+module.exports = function(News, User, passport, moment){
     return {
         SetRouting: function(router){
             router.get('/', this.indexpage);
@@ -27,7 +27,7 @@ module.exports = function(News, User, passport){
             var errors = req.flash('error');
             News.find({}).skip((perPage * page) - perPage).limit(perPage).sort("-submitted").populate({ path: 'likes.owner', model: 'User'}).exec((err, news) => {
               News.countDocuments().exec((err, count) => {
-                res.render("index", { user: req.user, feeds: news, errors: errors, hasErrors: errors.length > 0, current: page,pages: Math.ceil(count / perPage)});
+                res.render("index", { user: req.user, feeds: news, moment: moment, errors: errors, hasErrors: errors.length > 0, current: page,pages: Math.ceil(count / perPage)});
               })  
             });
             // const count = news.length;
