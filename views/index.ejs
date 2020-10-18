@@ -27,7 +27,7 @@
           <%- include("./partials/header.ejs") %>
           <%- include("./partials/sidebar.ejs") %>
           
-            <div class="content-wrapper">
+            <div class="content-wrapper" style = "background: #0E0E10">
                 <% if(hasErrors){ %>
                   <% _.forEach(errors, (error) => { %>
                     <div class = "alert alert-danger text-center">
@@ -56,30 +56,62 @@
                           </div> --> 
                         </div>
                         <div class = "col-md-8">
-                          <% _.forEach(feeds, (feed) => { %>  
-                            <a href="/news/show/<%= feed._id %>">
-                              <div class="card mb-2" background>
-                                <div class="no-border text-uppercase px-4 pb-1 pt-4" style = "color: #303030;font-size: 18px;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif"><%= feed.title %></div>
-                                <div class="card-body">
-                                <!-- <p class="card-text"><%= feed.content %></p> -->
-                                <% if(user){ %>
-                                  <a href="/like/<%= user.username %>/<%= feed._id %>" class="card-link"><i class="fi-xwluxl-heart-solid" style = "color: #e31b23;font-size: 20px;"></i> <%= feed.likes.length %></a>
-                                  <a href="" class="card-link"><i class="fi-xnsuxl-eye-solid" style = "color: #808080"></i> <%= feed.views %></a>
-                                  <a href="/news/show/<%= feed._id %>" class="card-link"><i class="fi-xnsuxl-comment-square-dot-solid" style = "color: #808080"></i> <%= feed.comments.length %></a>
-                                <% } %>
-                                </div>
-                            </div>
-                            </a>
-                          <% }) %>
-                            </div>
+                          <div>
+                            <% _.forEach(feeds, (feed) => { %>  
+                              <a href="/news/show/<%= feed._id %>">
+                                <div class="card mb-2" background>
+                                  <div class="no-border text-uppercase px-4 pb-1 pt-4" style = "color: #303030;font-size: 18px;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif"><%= feed.title %></div>
+                                  <div class="card-body">
+                                  <!-- <p class="card-text"><%= feed.content %></p> -->
+                                  <% if(user){ %>
+                                    <a href="/like/<%= user.username %>/<%= feed._id %>" class="card-link"><i class="fi-xwluxl-heart-solid" style = "color: #e31b23;font-size: 20px;"></i> <%= feed.likes.length %></a>
+                                    <a href="" class="card-link"><i class="fi-xnsuxl-eye-solid" style = "color: #808080"></i> <%= feed.views %></a>
+                                    <a href="/news/show/<%= feed._id %>" class="card-link"><i class="fi-xnsuxl-comment-square-dot-solid" style = "color: #808080"></i> <%= feed.comments.length %></a>
+                                  <% } %>
+                                  </div>
+                              </div>
+                              </a>
+                            <% }) %>
+                          </div>
+                              <% if (pages > 0) { %>
+                                <ul class="pagination text-center">
+                                    <% if (current == 1) { %>
+                                        <li class="disabled"><a>First</a></li>
+                                    <% } else { %>
+                                        <li><a href="/home/1">First</a></li>
+                                    <% } %>
+                                    <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                                    <% if (i !== 1) { %>
+                                        <li class="disabled"><a>...</a></li>
+                                    <% } %>
+                                    <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                                        <% if (i == current) { %>
+                                            <li class="active"><a><%= i %></a></li>
+                                        <% } else { %>
+                                            <li><a href="/home/<%= i %>"><%= i %></a></li>
+                                        <% } %>
+                                        <% if (i == Number(current) + 4 && i < pages) { %>
+                                            <li class="disabled"><a>...</a></li>
+                                        <% } %>
+                                    <% } %>
+                                    <% if (current == pages) { %>
+                                        <li class="disabled"><a>Last</a></li>
+                                    <% } else { %>
+                                        <li><a href="/home/<%= pages %>">Last</a></li>
+                                    <% } %>
+                                </ul>
+                            <% } %>
+                        </div>
                         <div class = "col-md-2">
 
                         </div>
                     </div>
                   <%- include ("./partials/modals.ejs") %>
                 </section>
-            </div>
-            <footer class="main-footer"></footer>
+              </div>
+            <!-- <footer class="main-footer">
+              
+            </footer> -->
         </div>
 </body>
 </html>

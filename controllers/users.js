@@ -2,7 +2,7 @@ module.exports = function(News, User, passport){
     return {
         SetRouting: function(router){
             router.get('/', this.indexpage);
-            router.get('/home', this.home);
+            router.get('/home/:page', this.home);
             router.get('/upload', this.uploadNews);
             router.get('/like/:username/:id', this.like);
             router.get('/comment/:username/:id', this.comment);
@@ -15,16 +15,22 @@ module.exports = function(News, User, passport){
         },
         indexpage: async function(req, res){
             if(req.user){
-                res.redirect('/home');
+                res.redirect('/home/1');
             }else{
                 var errors = req.flash('error');
                 res.render("authenticate", { user: req.user, errors: errors, hasErrors: errors.length > 0});
             }
         },
         home: async function(req, res){
-            const news = await News.find({}).sort("-submitted").populate({ path: 'likes.owner', model: 'User'}).exec();
+            var perPage = 8
+            var page = req.params.page || 1
             var errors = req.flash('error');
-            res.render("index", { user: req.user, feeds: news, errors: errors, hasErrors: errors.length > 0});
+            News.find({}).skip((perPage * page) - perPage).limit(perPage).sort("-submitted").populate({ path: 'likes.owner', model: 'User'}).exec((err, news) => {
+              News.countDocuments().exec((err, count) => {
+                res.render("index", { user: req.user, feeds: news, errors: errors, hasErrors: errors.length > 0, current: page,pages: Math.ceil(count / perPage)});
+              })  
+            });
+            // const count = news.length;
         },
         uploadNews: function(req, res){
             res.render('upload');
