@@ -6,6 +6,7 @@ const myModules = [
     ['News', './models/news'],
     ['User', './models/user'],
     ['Comment', './models/comment'],
+    ['Link', './models/link'],
     ['passport', 'passport'],
     ['async', 'async'],
     ['moment', 'moment']

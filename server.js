@@ -12,7 +12,7 @@ const passport = require('passport');
 const container = require("./container");
 const news = require('./controllers/news');
 
-container.resolve(function(users, news, _){
+container.resolve(function(users, news, upload, _){
 
     const app = showExpress();
 
@@ -33,6 +33,7 @@ container.resolve(function(users, news, _){
         const router = require('express-promise-router')();
         users.SetRouting(router);
         news.SetRouting(router);
+        upload.SetRouting(router);
 
         app.use(router);
 
