@@ -26,13 +26,11 @@ module.exports = function(News, User, Link, passport, moment){
             var page = req.params.page || 1
             var errors = req.flash('error');
             var links = await Link.find({}).limit(5).sort("-submitted").exec();
-            console.log(links);
             News.find({}).skip((perPage * page) - perPage).limit(perPage).sort("-submitted").populate({ path: 'likes.owner', model: 'User'}).exec((err, news) => {
               News.countDocuments().exec((err, count) => {
                 res.render("index", { user: req.user, feeds: news, moment: moment, errors: errors, hasErrors: errors.length > 0, current: page,pages: Math.ceil(count / perPage), links: links});
               })  
             });
-            // const count = news.length;
         },
         uploadNews: function(req, res){
             res.render('upload');
