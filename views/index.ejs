@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.11/css/skins/skin-blue.css">
     
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
     <body class="hold-transition sidebar-collapse skin-black sidebar-mini">
@@ -78,9 +79,9 @@
                               <% if (pages > 0) { %>
                                 <ul class="pagination text-center">
                                     <% if (current == 1) { %>
-                                        <li class="disabled"><a>First</a></li>
+                                        <li class="disabled"><a class = "bg-primary pgbutton"  style = "color: #fff">First</a></li>
                                     <% } else { %>
-                                        <li><a href="/home/1">First</a></li>
+                                        <li><a href="/home/1" class = "bg-primary pgbutton" style = "color: #fff">First</a></li>
                                     <% } %>
                                     <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
                                     <% if (i !== 1) { %>
@@ -88,18 +89,18 @@
                                     <% } %>
                                     <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
                                         <% if (i == current) { %>
-                                            <li class="active"><a><%= i %></a></li>
+                                            <li class="active"><a class = "bg-primary pgbutton"  style = "color: #fff"><%= i %></a></li>
                                         <% } else { %>
-                                            <li><a href="/home/<%= i %>"><%= i %></a></li>
+                                            <li><a href="/home/<%= i %>" class = "bg-primary pgbutton"  style = "color: #fff"><%= i %></a></li>
                                         <% } %>
                                         <% if (i == Number(current) + 4 && i < pages) { %>
                                             <li class="disabled"><a>...</a></li>
                                         <% } %>
                                     <% } %>
                                     <% if (current == pages) { %>
-                                        <li class="disabled"><a>Last</a></li>
+                                        <li class="disabled"><a class = "bg-primary pgbutton"  style = "color: #fff">Last</a></li>
                                     <% } else { %>
-                                        <li><a href="/home/<%= pages %>">Last</a></li>
+                                        <li><a href="/home/<%= pages %>" class = "bg-primary pgbutton"  style = "color: #fff">Last</a></li>
                                     <% } %>
                                 </ul>
                             <% } %>
@@ -112,6 +113,9 @@
                                     <a href="<%= link.link %>" target = "_blank"><%= link.title %></a>
                                 </li>
                             <% }) %>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                  <a href="/links" target = "_blank">More</a>
+                                </li>
                         </ul> 
                         <iframe width="100%" height = "250px;" class = "mb-3" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
                         <a href = "/" class = "text-lowercase">
