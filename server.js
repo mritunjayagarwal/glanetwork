@@ -45,6 +45,9 @@ container.resolve(function(users, news, upload, _){
 
     function configureExpress(app){
 
+        app.use(compression());
+        app.use(helmet());
+
         require('./passport/signup');
         require('./passport/login');
 
