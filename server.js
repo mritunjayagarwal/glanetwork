@@ -9,6 +9,8 @@ const MongoStore = require('connect-mongo')(session);
 const http = require('http');
 const socketIo = require('socket.io');
 const passport = require('passport');
+const compression = require('compression');
+const helmet = require('helmet');
 const container = require("./container");
 const news = require('./controllers/news');
 
