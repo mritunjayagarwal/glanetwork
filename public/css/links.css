@@ -1,0 +1,23 @@
+.visitlink{
+    border:none;
+}
+
+.visitlink:hover{
+    background: #f9f9f9;
+    margin-top: -5px;
+    margin-left: -5px;
+    box-shadow: 2px 5px rgba(0,0,0, 0.5);
+    transition: 0.25s;
+}
+
+.clicklink{
+    color: #303030;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif
+}
+
+.clicklink:hover{
+    background: #007bff;
+    color: #fff;
+    transition: 0.2s;
+}

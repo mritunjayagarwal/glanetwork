@@ -8,6 +8,8 @@ module.exports = function(News, User, Link, passport, moment){
             router.get('/comment/:username/:id', this.comment);
             router.get('/logout', this.logout);
             router.get('/authenticate', this.authenticate);
+            router.get('/whoweare', this.whoweare);
+            router.get('/links', this.links)
 
             router.post('/upload', this.upload);
             router.post('/create', this.createAccount);
@@ -128,6 +130,14 @@ module.exports = function(News, User, Link, passport, moment){
         },
         authenticate: function(req, res){
             res.render('authenticate')
+        },
+        whoweare: function(req, res){
+            res.send("We are who we are...I am MA");
+        },
+        links: async function(req, res){
+            var errors = req.flash('error');
+            var links = await Link.find({}).sort("-submitted").exec()
+            res.render('links', { errors: errors, hasErrors: errors.length > 0, links: links, moment: moment})
         }
     }
 }

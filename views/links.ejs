@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script defer src="https://friconix.com/cdn/friconix-0.1765.js"> </script>
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.11/css/skins/skin-green.css">
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.11/js/app.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.11/css/AdminLTE.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.11/css/skins/skin-blue.css">
+    
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/links.css">
+</head>
+<body>
+    <body class="hold-transition sidebar-collapse skin-black sidebar-mini">
+        <!-- Site wrapper -->
+        <div class="wrapper">
+        
+          <%- include("./partials/header.ejs") %>
+          <%- include("./partials/sidebar.ejs") %>
+          
+            <div class="content-wrapper">
+                <% if(hasErrors){ %>
+                  <% _.forEach(errors, (error) => { %>
+                    <div class = "alert alert-danger text-center">
+                        <a href = "#" class = "close" data-dismiss = "alert" aria-label="close">&times;</a>
+                    <%= error %>
+                    </div>
+                  <% }) %>
+                <% } %>
+                <section class="content">
+                    <div class = "row">
+                        <% _.forEach(links, (link) => { %>
+                            <div class = "col-sm-12 col-md-6 col-lg-4">
+                                <div class="card mb-3 visitlink">
+                                    <div class="no-border text-uppercase px-3 pt-3" style = "color: #303030;font-size: 16px;font-family: Arial, Helvetica, sans-serif;font-weight: bold"><%= link.title %></div>
+                                    <span class = "pull-left no-border px-3 pb-0 mt-2" style = "color: #505050; font-weight: bolder; font-size: 12px;"><i class = "fa fa-clock"></i> <%= moment(link.submitted).format("lll") %></span>
+                                    <div class="card-body">
+                                    </div>
+                                    <a href="<%= link.link %>" target = "_blank">
+                                        <div class = "card-footer clicklink">
+                                            Click here to visit
+                                        </div>
+                                    </a>    
+                                </div>
+                            </div>
+                        <% }) %>
+                    </div>
+                </section>
+              </div>
+            <footer class="main-footer text-center" style = "background: #007bff;color: #fff;width: 100%;">
+              <div class = "row">
+                <div class = "col-md-8">
+                  - NETWORK FOR STUDENTS BY THE STUDENTS
+                </div>
+                <div class = "col-md-4">
+                  &copy;2020 GLANETWORK
+                </div>
+              </div>
+            </footer>
+        </div>
+</body>
+</html>
