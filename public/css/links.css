@@ -21,3 +21,17 @@
     color: #fff;
     transition: 0.2s;
 }
+
+.pagination {
+    width: 100%;
+    padding-top: 10px;
+}
+
+.pgbutton{
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.pagination li {
+    margin-right: 10px;
+}

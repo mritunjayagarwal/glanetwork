@@ -9,7 +9,7 @@ module.exports = function(News, User, Link, passport, moment){
             router.get('/logout', this.logout);
             router.get('/authenticate', this.authenticate);
             router.get('/whoweare', this.whoweare);
-            router.get('/links', this.links)
+            router.get('/links/:page', this.links)
 
             router.post('/upload', this.upload);
             router.post('/create', this.createAccount);
@@ -135,9 +135,14 @@ module.exports = function(News, User, Link, passport, moment){
             res.send("We are who we are...I am MA");
         },
         links: async function(req, res){
+            var perPage = 9;
+            var page = req.params.page || 1;
             var errors = req.flash('error');
-            var links = await Link.find({}).sort("-submitted").exec()
-            res.render('links', { errors: errors, hasErrors: errors.length > 0, links: links, moment: moment})
+            Link.find({}).skip((perPage * page) - perPage).limit(perPage).sort("-submitted").exec((err, links) => {
+                Link.countDocuments().exec((err, count) => {
+                    res.render('links', { errors: errors, hasErrors: errors.length > 0, links: links, moment: moment, current: page,pages: Math.ceil(count / perPage)});
+                })
+            });
         }
     }
 }

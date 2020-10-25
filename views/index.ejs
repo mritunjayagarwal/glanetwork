@@ -76,14 +76,14 @@
                               </a>
                             <% }) %>
                           </div>
-                          <div class = "row">
+                          <div class = "row my-3">
                               <div class = "mx-auto">
                                 <% if (pages > 0) { %>
                                   <ul class="pagination text-center">
                                       <% if (current == 1) { %>
-                                          <li class="disabled"><a class = "bg-primary pgbutton"  style = "color: #fff">First</a></li>
+                                          <li class="disabled"><a class = "bg-primary pgbutton mr-1"  style = "color: #fff">First</a></li>
                                       <% } else { %>
-                                          <li><a href="/home/1" class = "bg-primary pgbutton" style = "color: #fff">First</a></li>
+                                          <li><a href="/home/1" class = "bg-primary pgbutton mr-1" style = "color: #fff">First</a></li>
                                       <% } %>
                                       <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
                                       <% if (i !== 1) { %>
@@ -91,7 +91,7 @@
                                       <% } %>
                                       <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
                                           <% if (i == current) { %>
-                                              <li class="active"><a class = "bg-primary pgbutton px-2 mx-2"  style = "color: #fff;"><%= i %></a></li>
+                                              <li class="active"><a class = "bg-primary pgbutton px-2 mr-2"  style = "color: #fff;"><%= i %></a></li>
                                           <% } else { %>
                                               <li><a href="/home/<%= i %>" class = "bg-primary pgbutton px-2 mr-2"  style = "color: #fff"><%= i %></a></li>
                                           <% } %>
@@ -118,7 +118,7 @@
                                 </li>
                             <% }) %>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                                  <a href="/links" target = "_blank">More</a>
+                                  <a href="/links/1">More</a>
                                 </li>
                         </ul> 
                         <iframe width="100%" height = "250px;" class = "mb-3" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
