@@ -9,7 +9,7 @@ module.exports = function(News, User, Link, passport, moment){
             router.get('/logout', this.logout);
             router.get('/authenticate', this.authenticate);
             router.get('/whoweare', this.whoweare);
-            router.get('/links/:page', this.links)
+            router.get('/links/:page', this.links);
 
             router.post('/upload', this.upload);
             router.post('/create', this.createAccount);
@@ -132,7 +132,8 @@ module.exports = function(News, User, Link, passport, moment){
             res.render('authenticate')
         },
         whoweare: function(req, res){
-            res.send("We are who we are...I am MA");
+            var errors = req.flash('error');
+            res.render('about-us', { errors: errors, hasErrors: errors.length > 0});
         },
         links: async function(req, res){
             var perPage = 9;
