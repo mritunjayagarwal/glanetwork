@@ -13,7 +13,7 @@ module.exports = function(Link){
             newLink.save(function(err){
                 if(err) console.log(err);
                 console.log(req.body.title + " " + req.body.link)
-                res.redirect('back');
+                res.redirect('back'); 
             })
         }
     }
