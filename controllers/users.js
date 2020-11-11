@@ -16,12 +16,13 @@ module.exports = function(News, User, Link, passport, moment){
             router.post('/login', this.getInside);
         },
         indexpage: async function(req, res){
-            if(req.user){
-                res.redirect('/home/1');
-            }else{
-                var errors = req.flash('error');
-                res.render("authenticate", { user: req.user, errors: errors, hasErrors: errors.length > 0});
-            }
+            res.redirect("/home/1")
+            // if(req.user){
+            //     res.redirect('/home/1');
+            // }else{
+            //     var errors = req.flash('error');
+            //     res.render("authenticate", { user: req.user, errors: errors, hasErrors: errors.length > 0});
+            // }
         },
         home: async function(req, res){
             var perPage = 8
