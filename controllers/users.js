@@ -134,7 +134,7 @@ module.exports = function(News, User, Link, passport, moment){
         },
         whoweare: function(req, res){
             var errors = req.flash('error');
-            res.render('about-us', { errors: errors, hasErrors: errors.length > 0});
+            res.render('about-us', {user: req.user, errors: errors, hasErrors: errors.length > 0});
         },
         links: async function(req, res){
             var perPage = 9;
@@ -142,7 +142,7 @@ module.exports = function(News, User, Link, passport, moment){
             var errors = req.flash('error');
             Link.find({}).skip((perPage * page) - perPage).limit(perPage).sort("-submitted").exec((err, links) => {
                 Link.countDocuments().exec((err, count) => {
-                    res.render('links', { errors: errors, hasErrors: errors.length > 0, links: links, moment: moment, current: page,pages: Math.ceil(count / perPage)});
+                    res.render('links', {user: req.user, errors: errors, hasErrors: errors.length > 0, links: links, moment: moment, current: page,pages: Math.ceil(count / perPage)});
                 })
             });
         }
