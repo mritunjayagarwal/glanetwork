@@ -48,7 +48,7 @@
                           <!-- Author -->
                           <p class="lead">
                             by
-                            <strong>Anonymous  <span class = "pull-right text-lowercase" style = "font-size: 20px;"><%= news.views %> views</span></strong>
+                            <strong>Almighty99  <span class = "pull-right text-lowercase" style = "font-size: 20px;"><%= news.views %> views</span></strong>
                           </p>
 
                           <hr>
@@ -75,8 +75,12 @@
                             <div class="media mb-3">
                               <img class="d-flex mr-3 rounded-circle" src="https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png" alt="" style = "width: 50px;height: auto;">
                               <div class="media-body">
-                                <h5 class="mt-0">Anonymous <span class = "pull-right" style = "font-size: 15px;"><%= moment(comment.comment.commentedon).calendar(); %></span></h5>
-                                <p><%= comment.comment.content %></p>
+                                <% if(comment.owner){ %>
+                                  <h5 class="mt-0"><%= comment.owner.username %><span class = "pull-right" style = "font-size: 15px;"><%= moment(comment.commentedon).calendar(); %></span></h5>
+                              <% }else{ %>
+                                  <h5 class="mt-0">Anonymous <span class = "pull-right" style = "font-size: 15px;"><%= moment(comment.commentedon).calendar(); %></span></h5>
+                                <% } %>
+                                <p><%= comment.content %></p>
                               </div>
                             </div> 
                           <% } %>          

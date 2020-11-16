@@ -10,6 +10,7 @@ module.exports = function(News, User, Link, passport, moment){
             router.get('/authenticate', this.authenticate);
             router.get('/whoweare', this.whoweare);
             router.get('/links/:page', this.links);
+            router.get('/member/signup/', this.signup)
 
             router.post('/upload', this.upload);
             router.post('/create', this.createAccount);
@@ -115,6 +116,13 @@ module.exports = function(News, User, Link, passport, moment){
                 res.redirect('back');
             });
         },
+        signup: function(req, res){
+            if(req.user){
+                res.redirect('/home/1/')
+            }else{
+                res.render('signup')
+            }
+        },
         createAccount: passport.authenticate('local.signup', {
             successRedirect: 'back',
             failureRedirect: 'back',
@@ -130,7 +138,11 @@ module.exports = function(News, User, Link, passport, moment){
             res.redirect('/');
         },
         authenticate: function(req, res){
-            res.render('authenticate')
+            if(req.user){
+                res.redirect('/home/1/')
+            }else{
+                res.render('authenticate')
+            }
         },
         whoweare: function(req, res){
             var errors = req.flash('error');

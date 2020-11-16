@@ -14,14 +14,18 @@ module.exports = function(News, Comment, moment){
                 }
             });
             const news = await News.findOne({ _id: req.params.id}).populate({ path: 'comments.comment', model: 'Comment'}).exec();
+            const comments = await Comment.find({ news: req.params.id}).populate({ path: 'owner', model: 'User'}).exec();
             var errors = req.flash('error');
-            res.render('news', { user: req.user, errors: errors, hasErrors: errors.length > 0, news: news, moment: moment, comments: news.comments});
+            res.render('news', { user: req.user, errors: errors, hasErrors: errors.length > 0, news: news, moment: moment, comments: comments});
         },
         newsComment: async function(req, res){
 
             if(req.body.content != ""){
-                const newComment = new Comment();
+            const newComment = new Comment();
             newComment.news = req.params.id;
+            if(req.user){
+                newComment.owner = req.user._id;
+            }
             newComment.content = req.body.content;
             newComment.save(function(){
                 console.log("Commented Succesfully");
