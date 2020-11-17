@@ -13,10 +13,11 @@ module.exports = function(News, Comment, moment, User){
                     views: +1
                 }
             });
+            var ranks = await User.find({}).limit(10).sort("level").exec();
             const news = await News.findOne({ _id: req.params.id}).populate({ path: 'comments.comment', model: 'Comment'}).exec();
             const comments = await Comment.find({ news: req.params.id}).populate({ path: 'owner', model: 'User'}).exec();
             var errors = req.flash('error');
-            res.render('news', { user: req.user, errors: errors, hasErrors: errors.length > 0, news: news, moment: moment, comments: comments});
+            res.render('news', { user: req.user, errors: errors, hasErrors: errors.length > 0, news: news, moment: moment, comments: comments, ranks: ranks});
         },
         newsComment: async function(req, res){
 

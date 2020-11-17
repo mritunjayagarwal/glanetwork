@@ -77,7 +77,7 @@
                               <div class="media-body">
                                 <% if(comment.owner){ %>
                                   <h5 class="mt-0"><%= comment.owner.username %><span class = "pull-right" style = "font-size: 15px;"><%= moment(comment.commentedon).calendar(); %></span></h5>
-                              <% }else{ %>
+                                <% }else{ %>
                                   <h5 class="mt-0">Anonymous <span class = "pull-right" style = "font-size: 15px;"><%= moment(comment.commentedon).calendar(); %></span></h5>
                                 <% } %>
                                 <p><%= comment.content %></p>

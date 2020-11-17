@@ -30,9 +30,10 @@ module.exports = function(News, User, Link, passport, moment){
             var page = req.params.page || 1
             var errors = req.flash('error');
             var links = await Link.find({}).limit(5).sort("-submitted").exec();
+            var ranks = await User.find({}).limit(10).sort('-level').exec();
             News.find({}).skip((perPage * page) - perPage).limit(perPage).sort("-submitted").populate({ path: 'likes.owner', model: 'User'}).exec((err, news) => {
               News.countDocuments().exec((err, count) => {
-                res.render("index", { user: req.user, feeds: news, moment: moment, errors: errors, hasErrors: errors.length > 0, current: page,pages: Math.ceil(count / perPage), links: links});
+                res.render("index", { user: req.user, feeds: news, moment: moment, errors: errors, hasErrors: errors.length > 0, current: page,pages: Math.ceil(count / perPage), links: links, ranks: ranks});
               })  
             });
         },
@@ -166,17 +167,19 @@ module.exports = function(News, User, Link, passport, moment){
                 res.render('authenticate')
             }
         },
-        whoweare: function(req, res){
+        whoweare: async function(req, res){
+            var ranks = await User.find({}).limit(10).sort("level").exec();
             var errors = req.flash('error');
-            res.render('about-us', {user: req.user, errors: errors, hasErrors: errors.length > 0});
+            res.render('about-us', {user: req.user, errors: errors, hasErrors: errors.length > 0, ranks: ranks});
         },
         links: async function(req, res){
             var perPage = 9;
             var page = req.params.page || 1;
             var errors = req.flash('error');
+            var ranks = await User.find({}).limit(10).sort("level").exec();
             Link.find({}).skip((perPage * page) - perPage).limit(perPage).sort("-submitted").exec((err, links) => {
                 Link.countDocuments().exec((err, count) => {
-                    res.render('links', {user: req.user, errors: errors, hasErrors: errors.length > 0, links: links, moment: moment, current: page,pages: Math.ceil(count / perPage)});
+                    res.render('links', {user: req.user, errors: errors, hasErrors: errors.length > 0, links: links, moment: moment, current: page,pages: Math.ceil(count / perPage), ranks: ranks});
                 })
             });
         }
