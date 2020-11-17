@@ -1,4 +1,4 @@
-module.exports = function(News, Comment, moment){
+module.exports = function(News, Comment, moment, User){
     return {
         SetRouting: function(router){
             router.get('/news/show/:id', this.showNews);
@@ -31,18 +31,47 @@ module.exports = function(News, Comment, moment){
                 console.log("Commented Succesfully");
             });
 
-            News.updateOne({
-                _id: req.params.id
-            }, {
-                $push: {
-                    comments: {
-                        comment: newComment._id
+            if(req.user){
+
+                User.updateOne({
+                    _id: req.user._id
+                }, {
+                    $push: {
+                        comments: {
+                            comment: newComment._id
+                        }
                     }
-                }
-            }, () => {
-                console.log("News Update Successfully");
-                res.redirect('back');
-            })
+                }, () => {
+                    console.log("User Update Success")
+                })
+
+                News.updateOne({
+                    _id: req.params.id
+                }, {
+                    $push: {
+                        comments: {
+                            comment: newComment._id
+                        },
+                        owner: req.user._id
+                    }
+                }, () => {
+                    console.log("User News Update Successful");
+                    res.redirect('back');
+                })
+            }else{
+                News.updateOne({
+                    _id: req.params.id
+                }, {
+                    $push: {
+                        comments: {
+                            comment: newComment._id
+                        }
+                    }
+                }, () => {
+                    console.log("News Update Successfully");
+                    res.redirect('back');
+                })
+            }
             }else{
                 res.redirect('back')
             }

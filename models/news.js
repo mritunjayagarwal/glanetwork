@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const newsSchema = new Schema({
     title: { type: String, required: true, lowercase: true},
+    owner: { type: Schema.Types.ObjectId, ref: 'User'},
     content: String,
     submitted: { type: Date, default: Date.now},
     views: { type: Number, default: 0},

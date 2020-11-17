@@ -29,7 +29,7 @@ container.resolve(function(users, news, upload, _){
         configureExpress(app);
 
         server.listen(process.env.PORT || 8080, function(){
-            console.log("Connected To HideOut");
+            console.log("Connected to THE GLA NETWORK");
         });
 
         const router = require('express-promise-router')();

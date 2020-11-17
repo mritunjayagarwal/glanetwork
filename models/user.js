@@ -11,6 +11,18 @@ const userSchema = new Schema({
             likeon: { type: Date, default: Date.now},
         }
     ],
+    newses: [
+        {
+            news: { type: Schema.Types.ObjectId, ref: 'News'},
+            uon: { type: Date, default: Date.now}
+        }
+    ],
+    comments: [
+        {
+            comment: { type: Schema.Types.ObjectId, ref: 'Comment'},
+            con: { type: Date, default: Date.now}
+        }
+    ],
     created: { type: Date, default: Date.now}
 });
 

@@ -37,15 +37,37 @@ module.exports = function(News, User, Link, passport, moment){
             });
         },
         uploadNews: function(req, res){
-            res.render('upload');
+            if(req.user){
+                res.render('upload');
+            }else{
+                res.redirect('/home/1/')
+            }
         },
         upload: function(req, res){
-            const newNews = new News();
-            newNews.title = req.body.title;
-            newNews.content = req.body.content;
-            newNews.save(function(){
-                res.redirect('/');
-            });
+            if(req.user){
+                const newNews = new News();
+                newNews.title = req.body.title;
+                newNews.owner = req.user._id;
+                newNews.content = req.body.content;
+                newNews.save(function(){
+                    console.log("News Uploaded");
+                });
+
+                User.updateOne({
+                    _id: req.user._id
+                }, {
+                    $push: {
+                        newses: {
+                            news: newNews._id
+                        }
+                    }
+                }, (err) => {
+                    console.log("User Updated");
+                    res.redirect('/home/1')
+                })
+            }else{
+                res.redirect('/')
+            }
         },
         like: async function(req, res){
             if(req.user){
