@@ -3,13 +3,13 @@
     <section class="sidebar">
         <!-- search form -->
         <ul class="sidebar-menu">
+            <% _.forEach(ranks, (rank) => { %>
+                <li><a href="/whoweare"><img class="mr-2 rounded-circle" src="https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png" alt="" style = "width: 20px;height: auto;"><span><%= rank.username %></span> <span class = "badge badge-primary badge-pill pull-right">+ <%= rank.level %></span></a></li>
+            <% }) %>
             <li class="header mt-2 text-center" style = "color: #d3d3d3;font-size: 18px;">Menu</li>
             <li><a href="/links/1"><i class="fa fa-link"></i> <span>Major Links</span></a></li>
             <li><a href="/authenticate"><i class="fa fa-user-circle"></i> <span>Signup or Login</span></a></li>
             <li><a href="/whoweare"><i class="fa fa-info-circle"></i> <span>About us</span></a></li>
-            <% _.forEach(ranks, (rank) => { %>
-                <li><a href="/whoweare"><img class="mr-2 rounded-circle" src="https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png" alt="" style = "width: 20px;height: auto;"><span><%= rank.username %></span> <span class = "badge badge-primary badge-pill pull-right">+ <%= rank.level %> points</span></a></li>
-            <% }) %>
         </ul>
     </section>
     <!-- /.sidebar -->

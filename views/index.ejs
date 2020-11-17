@@ -68,7 +68,7 @@
                                   <% if(user){ %>
                                     <a href="/like/<%= user.username %>/<%= feed._id %>" class="card-link"><i class="fi-xwluxl-heart-solid" style = "color: #e31b23;font-size: 20px;margin-left: -5px;"></i> <%= feed.likes.length %></a>
                                   <% } %>
-                                  <a href="" class="card-link"><i class="fi-xnsuxl-eye-solid" style = "color: #606060"></i> <%= feed.views %></a>
+                                  <a href="/news/show/<%= feed._id %>" class="card-link"><i class="fi-xnsuxl-eye-solid" style = "color: #606060"></i> <%= feed.views %></a>
                                   <a href="/news/show/<%= feed._id %>" class="card-link"><i class="fi-xnsuxl-comment-square-dot-solid" style = "color: #606060"></i> <%= feed.comments.length %></a>
                                   <span class = "pull-right" style = "color: #606060;margin-top: 5px;font-weight: bolder;"><%= moment(feed.submitted).fromNow() %></span>
                                   </div>
