@@ -89,11 +89,24 @@
                         <!-- Sidebar Widgets Column -->
                         <div class="col-md-4">
                   
+                          <ul class="list-group mt-4">
+                            <li class="list-group-item bg-primary" style = "color: #fff"><i class="fa fa-line-chart" aria-hidden="true"></i> Trendy Links</li>
+                          <% _.forEach(links, (link) => { %>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <a href="<%= link.link %>" target = "_blank"><%= link.title %></a>
+                                <span class = "pull-right"> <a href="<%= link.link %>">click to open</a></span>
+                            </li>
+                          <% }) %>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                              <a href="/links/1" style = "color: #000">More</a>
+                              <span class = "pull-right"><i class = "fa fa-arrow-right"></i></span>
+                            </li>
+                          </ul> 
+
                           <a href = "/" class = "text-lowercase">
-                            <img class="img-fluid rounded mb-2" src="https://www.aavn.edu.vn/files/Contact%20Us_Workwithus.png" alt="">
+                            <img class="mt-4 img-fluid rounded mb-2" src="https://www.aavn.edu.vn/files/Contact%20Us_Workwithus.png" alt="">
                             <p class = "text-center">Click here to work with us and get a chance to get ranked on our website</p>
-                            </a>
-                  
+                          </a>
                         </div>
                   
                       </div>

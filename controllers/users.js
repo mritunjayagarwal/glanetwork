@@ -30,7 +30,22 @@ module.exports = function(News, User, Link, passport, moment){
             var page = req.params.page || 1
             var errors = req.flash('error');
             var links = await Link.find({}).limit(5).sort("-submitted").exec();
-            var ranks = await User.find({}).exec();
+            if(req.user){
+                var clength = req.user.comments.length;
+                var nlength = req.user.newses.length;
+                var llength = req.user.liked.length;
+                var points = Math.ceil((clength)*10 + (nlength)*20 + (llength)*5);
+                User.updateOne({
+                    _id: req.user._id
+                }, {
+                    $set: {
+                        level: points
+                    }
+                }, (err) => {
+                    console.log(" ");
+                });
+            }
+            var ranks = await User.find({level: { $gte: 1}}).limit(10).sort("-level").exec();
             News.find({}).skip((perPage * page) - perPage).limit(perPage).sort("-submitted").populate({ path: 'likes.owner', model: 'User'}).exec((err, news) => {
               News.countDocuments().exec((err, count) => {
                 res.render("index", { user: req.user, feeds: news, moment: moment, errors: errors, hasErrors: errors.length > 0, current: page,pages: Math.ceil(count / perPage), links: links, ranks: ranks});
@@ -168,7 +183,22 @@ module.exports = function(News, User, Link, passport, moment){
             }
         },
         whoweare: async function(req, res){
-            var ranks = await User.find({}).limit(10).sort("level").exec();
+            if(req.user){
+                var clength = req.user.comments.length;
+                var nlength = req.user.newses.length;
+                var llength = req.user.liked.length;
+                var points = Math.ceil((clength)*10 + (nlength)*20 + (llength)*5);
+                User.updateOne({
+                    _id: req.user._id
+                }, {
+                    $set: {
+                        level: points
+                    }
+                }, (err) => {
+                    console.log(" ");
+                });
+            }
+            var ranks = await User.find({level: { $gte: 1}}).limit(10).sort("-level").exec();
             var errors = req.flash('error');
             res.render('about-us', {user: req.user, errors: errors, hasErrors: errors.length > 0, ranks: ranks});
         },
@@ -176,7 +206,22 @@ module.exports = function(News, User, Link, passport, moment){
             var perPage = 9;
             var page = req.params.page || 1;
             var errors = req.flash('error');
-            var ranks = await User.find({}).limit(10).sort("level").exec();
+            if(req.user){
+                var clength = req.user.comments.length;
+                var nlength = req.user.newses.length;
+                var llength = req.user.liked.length;
+                var points = Math.ceil((clength)*10 + (nlength)*20 + (llength)*5);
+                User.updateOne({
+                    _id: req.user._id
+                }, {
+                    $set: {
+                        level: points
+                    }
+                }, (err) => {
+                    console.log(" ");
+                });
+            }
+            var ranks = await User.find({level: { $gte: 1}}).limit(10).sort("-level").exec();
             Link.find({}).skip((perPage * page) - perPage).limit(perPage).sort("-submitted").exec((err, links) => {
                 Link.countDocuments().exec((err, count) => {
                     res.render('links', {user: req.user, errors: errors, hasErrors: errors.length > 0, links: links, moment: moment, current: page,pages: Math.ceil(count / perPage), ranks: ranks});
