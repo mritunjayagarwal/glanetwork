@@ -42,7 +42,7 @@ module.exports = function(News, User, Link, passport, moment){
                         level: points
                     }
                 }, (err) => {
-                    console.log(" ");
+                    if(err) console.log(err);
                 });
             }
             var ranks = await User.find({level: { $gte: 1}}).limit(10).sort("-level").exec();
@@ -195,7 +195,7 @@ module.exports = function(News, User, Link, passport, moment){
                         level: points
                     }
                 }, (err) => {
-                    console.log(" ");
+                    if(err) console.log(err);
                 });
             }
             var ranks = await User.find({level: { $gte: 1}}).limit(10).sort("-level").exec();
@@ -218,7 +218,7 @@ module.exports = function(News, User, Link, passport, moment){
                         level: points
                     }
                 }, (err) => {
-                    console.log(" ");
+                    if(err) console.log(err);
                 });
             }
             var ranks = await User.find({level: { $gte: 1}}).limit(10).sort("-level").exec();

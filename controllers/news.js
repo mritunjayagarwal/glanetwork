@@ -25,7 +25,7 @@ module.exports = function(News, Comment, moment, User, Link){
                         level: points
                     }
                 }, (err) => {
-                    console.log(" ");
+                    if(err) console.log(err);
                 });
             }
             var ranks = await User.find({level: { $gte: 1}}).limit(10).sort("-level").exec();
@@ -49,6 +49,18 @@ module.exports = function(News, Comment, moment, User, Link){
             });
 
             if(req.user){
+                News.updateOne({
+                    _id: req.params.id
+                }, {
+                    $push: {
+                        comments: {
+                            comment: newComment._id
+                        }
+                    }
+                }, () => {
+                    console.log("News Update Successfully");
+                    res.redirect('back');
+                })
 
                 User.updateOne({
                     _id: req.user._id
@@ -59,21 +71,7 @@ module.exports = function(News, Comment, moment, User, Link){
                         }
                     }
                 }, () => {
-                    console.log("User Update Success")
-                })
-
-                News.updateOne({
-                    _id: req.params.id
-                }, {
-                    $push: {
-                        comments: {
-                            comment: newComment._id
-                        },
-                        owner: req.user._id
-                    }
-                }, () => {
-                    console.log("User News Update Successful");
-                    res.redirect('back');
+                    console.log("User active");
                 })
             }else{
                 News.updateOne({

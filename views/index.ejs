@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
-    <body class="hold-transition sidebar-collapse skin-black sidebar-mini">
+    <body class="hold-transition skin-black sidebar-mini">
         <!-- Site wrapper -->
         <div class="wrapper">
         
@@ -114,8 +114,8 @@
                                 <li class="list-group-item bg-primary" style = "color: #fff"><i class="fa fa-line-chart" aria-hidden="true"></i> Trendy Links</li>
                             <% _.forEach(links, (link) => { %>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    <a href="<%= link.link %>" target = "_blank"><%= link.title %></a>
-                                    <span class = "pull-right"> <a href="<%= link.link %>">click to open</a></span>
+                                    <a href="/visit/<%= link._id %>" target = "_blank"><%= link.title %></a>
+                                    <span class = "pull-right"> <a href="/visit/<%= link._id %>">click here</a></span>
                                 </li>
                             <% }) %>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
