@@ -92,9 +92,9 @@
                           <ul class="list-group mt-4">
                             <li class="list-group-item bg-primary" style = "color: #fff"><i class="fa fa-line-chart" aria-hidden="true"></i> Trendy Links</li>
                           <% _.forEach(links, (link) => { %>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <li class="list-group-item d-flex justify-content-between align-items-center text-capitalize">
                                 <a href="<%= link.link %>" target = "_blank"><%= link.title %></a>
-                                <span class = "pull-right"> <a href="<%= link.link %>">click to open</a></span>
+                                <span class = "pull-right"><a href="<%= link.link %>"><i class="fi-cwsuxl-check" style = "color: #007bff" title="verified"></i></a></span>
                             </li>
                           <% }) %>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
