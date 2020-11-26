@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
-    <body class="hold-transition sidebar-collapse sidebar-mini">
+    <body class="hold-transition sidebar-mini">
         <!-- Site wrapper -->
         <div class="wrapper">
         
@@ -55,7 +55,7 @@
                           <hr>
                   
                           <!-- Date/Time -->
-                          <p><%= moment(news.submitted).format('llll') %><span class = "pull-right"><%= moment(news.submitted).fromNow() %></span></p>
+                          <p><%= moment(news.submitted).format('MMMM Do YYYY') %><span class = "pull-right"><%= moment(news.submitted).fromNow() %></span></p>
                   
                           <!-- Post Content -->
                           <p style = "font-size: 20px;white-space: pre-line;white-space: pre-wrap;"><%= news.content %></p>
@@ -77,7 +77,7 @@
                               <img class="d-flex mr-3 rounded-circle" src="https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png" alt="" style = "width: 50px;height: auto;">
                               <div class="media-body">
                                 <% if(comment.owner){ %>
-                                  <h5 class="mt-0"><%= comment.owner.username %><span class = "pull-right" style = "font-size: 15px;"><%= moment(comment.commentedon).calendar(); %></span></h5>
+                                  <h5 class="mt-0"><%= comment.owner.username %><span class = "pull-right" style = "font-size: 15px;"><%= moment(comment.commentedon).fromNow(); %></span></h5>
                                 <% }else{ %>
                                   <h5 class="mt-0">Anonymous <span class = "pull-right" style = "font-size: 15px;"><%= moment(comment.commentedon).calendar(); %></span></h5>
                                 <% } %>

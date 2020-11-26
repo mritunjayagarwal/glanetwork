@@ -31,7 +31,7 @@
               <div class="container">
                 <div class="row" style = "margin-bottom: 100px;">
                   <div class="col-md-9 col-lg-8 mx-auto">
-                    <h3 class="login-heading mb-4 text-center">Welcome back!</h3>
+                    <h3 class="login-heading mb-4 text-center">Welcome Buddy!</h3>
                     <form action = "/create" method = "POST">
                       <div class="form-label-group">
                         <input type="text" id="inputEmail" name = "username" class="form-control" placeholder="Email address" required autofocus>
@@ -40,17 +40,17 @@
       
                       <div class="form-label-group">
                         <input type="password" name = "password" id="inputPassword" class="form-control" placeholder="Password" required>
-                        <label for="inputPassword">Password</label>
+                        <label for="inputPassword">password</label>
                       </div>
 
                       <div class="custom-control custom-checkbox mb-3">
                         <input type="checkbox" class="custom-control-input" id="customCheck1" required>
-                        <label class="custom-control-label" for="customCheck1">I've read and agreed to the</label> <a href = "" data-toggle="modal" data-target="#modalPoll-1" title="Click to read terms">terms and conditions</a>
+                        <label class="custom-control-label" for="customCheck1">I've read and agreed to the</label> <a data-toggle="modal" data-target="#modalPoll-1" title="Click to read terms">terms and conditions</a>
                       </div>
 
                       <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Create account</button>
                       <div class="text-center">
-                        <a class="small" href="#">Already a member?</a></div>
+                        <a class="small" href="/authenticate">Already a member? Login</a></div>
                     </form>
                   </div>
                 </div>

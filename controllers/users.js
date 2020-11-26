@@ -29,7 +29,7 @@ module.exports = function(News, User, Link, passport, moment){
             var perPage = 8
             var page = req.params.page || 1
             var errors = req.flash('error');
-            var links = await Link.find({}).limit(5).sort("-submitted").exec();
+            var links = await Link.find({}).limit(10).sort("-submitted").exec();
             if(req.user){
                 var clength = req.user.comments.length;
                 var nlength = req.user.newses.length;
@@ -56,7 +56,7 @@ module.exports = function(News, User, Link, passport, moment){
             if(req.user){
                 res.render('upload');
             }else{
-                res.redirect('/home/1/')
+                res.redirect('/member/signup')
             }
         },
         upload: function(req, res){
