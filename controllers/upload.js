@@ -5,6 +5,7 @@ module.exports = function(Link){
         SetRouting: function(router){
             router.post('/uploadlink', this.uploadlink);
             router.get('/visit/:id', this.visit);
+            router.get('/openwa', this.openwa)
         },
         uploadlink: function(req, res){
             const newLink = new Link();
@@ -34,6 +35,9 @@ module.exports = function(Link){
                     res.redirect('back');
                 }
             })
+        },
+        openwa: function(req, res){
+            res.render('blank', {user: req.user})
         }
     }
 }

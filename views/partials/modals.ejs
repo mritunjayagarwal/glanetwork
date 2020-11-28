@@ -25,33 +25,3 @@
       </div>
     </div>
   </div>
-
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" style = "border: 1px dashed 3007bff">
-      <div class="modal-content" style = "background: #151515">
-        <div class="modal-header py-1 mt-1 justify-content-center" style = "border: 0;">
-          <p class = "text-center mt-3 py-1" style = "color: #d3d3d3;font-size: 25px;font-weight: bolder;"><i class = "fa fa-upload mr-2"></i> Procedure to Upload</p>
-        </div>
-        <div class="modal-body py-0" style = "border: 0;margin-top:-5px;">
-          <form action="/login" method = "POST">
-              <div class="input-group mt-2">
-                <ul style = "color: #fff">
-                  <li>Click on continue button</li>
-                  <li>You will be redirected to Whatsapp</li>
-                  <li>You should have an account on GLA Network</li>
-                  <li>Send the auto-generated message and attach your document</li>
-                </ul>
-              </div>
-              <div class="input-group mt-2">
-                  <p class = "ml-4" style = "color: #d3d3d3">Note:- Your document should be a pdf only</p>
-              </div>
-              <div class = "row mt-1 mb-3">
-                <div class = "col">
-                  <span class = "btn btn-block btn-info"><a href="https://wa.me/918630123789/?text=Hi!I am <%= user.username %> and I am sharing my documents.Please Upload it under my name on GLANETWORK" target = "_blank" style = "color: #fff;"><span>Continue <i class = "fa fa-arrow-right"></i></span></a></span>
-                </div>
-              </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div> 
