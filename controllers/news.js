@@ -31,6 +31,11 @@ module.exports = function(News, Comment, moment, User, Link){
             }
             var ranks = await User.find({level: { $gte: 1}}).limit(10).sort("-level").exec();
             var links = await Link.find({}).limit(10).sort("-submitted").exec();
+            var dailys = await Link.find({ ctgry: 'daily'}).limit(4).sort("-submitted").exec();
+            var homeworks = await Link.find({ ctgry: 'homework'}).limit(4).sort("-submitted").exec();
+            var books = await Link.find({ ctgry: 'book'}).limit(4).sort("-submitted").populate({ path: 'owner', model: 'User'}).exec();
+            var idocs = await Link.find({ ctgry: 'idoc'}).limit(4).sort("-submitted").exec();
+            var ccs = await Link.find({ ctgry: 'cc'}).limit(4).sort("-submitted").exec();
             const news = await News.findOne({ _id: req.params.id}).populate({ path: 'comments.comment', model: 'Comment'}).exec();
             const comments = await Comment.find({ news: req.params.id}).populate({ path: 'owner', model: 'User'}).exec();
             var errors = req.flash('error');
