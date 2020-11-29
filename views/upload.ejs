@@ -25,16 +25,19 @@
         <h3>Upload Pdf</h3>
         <form action="/uploadlink" method = "POST">
             <label for="typecat">Enter Category</label>
-            <select name="category" id="typecat">
+            <select name="category" id="typecat" required>
                 <option value="daily">Daily Notes</option>
                 <option value="homework">Homework</option>
                 <option value="book">Book</option>
+                <option value="cc">Complete Chapter</option>
                 <option value="idoc">Syllabus/other related doc</option>
             </select><br><br>
             <label for="title">Title:</label>
-            <input type="text" name = "title" placeholder = "Title" id = "title"><br><br>
+            <input type="text" name = "title" placeholder = "Title" id = "title" required><br><br>
+            <label for="description">Description(optional): </label>
+            <textarea name="description" id="description" cols="30" rows="10"></textarea><br><br>
             <label for="link">Gdrive Link:</label>
-            <input type="text" name = "link" placeholder = "link" id = "link"><br><br>
+            <input type="text" name = "link" placeholder = "link" id = "link" required><br><br>
             <label for="owner">Submitted By:</label>
             <input type="text" name = "owner" placeholder = "Submitted By" id = "owner" value = "<%= user.username %>"><br><br>
             <label for="section">For Section:</label>

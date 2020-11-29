@@ -10,25 +10,41 @@ module.exports = function(Link, User){
         uploadlink: async function(req, res){
             if(req.user){
                 var owner = await User.findOne({ username: req.body.owner}).exec();
-                oid = owner._id;
+                if(owner){
+                    oid = owner._id;
+                }
                 const newLink = new Link();
-                newLink.owner = oid;
+                if(owner){
+                    newLink.owner = oid;
+                }
                 newLink.title = req.body.title;
                 newLink.ctgry = req.body.category;
-                newLink.section = req.body.section;
+                if(req.body.section){
+                    newLink.section = req.body.section;
+                }
+                if(req.body.description){
+                    newLink.desc = req.body.description;
+                }
                 newLink.link = req.body.link;
                 newLink.save(function(err){
                     if(err) console.log(err);
-                });
-                User.updateOne({
-                    username: req.body.owner
-                }, {
-                    $push: {
-                        docs: { doc: newLink._id}
+                    if(!owner){
+                        res.redirect('back');
                     }
-                }, (err) => {
-                    res.redirect('back');
-                })
+                });
+                if(owner){
+                    User.updateOne({
+                        username: req.body.owner
+                    }, {
+                        $push: {
+                            docs: { doc: newLink._id}
+                        }
+                    }, (err) => {
+                        res.redirect('back');
+                    })
+                }
+            }else{
+                res.redirect('back')
             }
         },
         visit: function(req, res){

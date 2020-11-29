@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
-    <body class="hold-transition skin-black sidebar-collapse sidebar-mini">
+    <body class="hold-transition skin-black sidebar-mini">
         <!-- Site wrapper -->
         <div class="wrapper">
         
@@ -57,7 +57,7 @@
                             <a href="#" class="list-group-item list-group-item-action">Settings</a>
                           </div>
                         </div> -->
-                        <div class = "col-md-8">
+                        <div class = "col-md-7">
                           <div>
                             <% _.forEach(feeds, (feed) => { %>  
                               <a href="/news/show/<%= feed._id %>">
@@ -110,47 +110,119 @@
                             </div>
                           </div>
                         </div>
-                        <div class = "col-md-4">
-                          <ul class="list-group mb-4">
-                                <li class="list-group-item bg-primary" style = "color: #fff"><i class="fa fa-line-chart" aria-hidden="true"></i> Daily Uploads</li>
-                            <% _.forEach(dailys, (daily) => { %>
-                                <li class="list-group-item d-flex justify-content-between align-items-center text-capitalize">
-                                    <a href="/visit/<%= daily._id %>" target = "_blank" style = "font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif"><%= daily.title %></a>
-                                    <span class = "pull-right ml-2"> <a href="<%= daily.link %>"><i class="fi-cwsuxl-check" style = "color: #007bff" title="verified"></i></a></span>
-                                </li>
-                            <% }) %>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                  <a href="/links/1" style = "color: #000">More</a>
-                                  <span class = "pull-right"><i class = "fa fa-arrow-right"></i></span>
-                                </li>
-                        </ul> 
-                        <ul class="list-group mb-4">
-                                <li class="list-group-item bg-primary" style = "color: #fff"><i class="fa fa-line-chart" aria-hidden="true"></i> Latest Done Assignments</li>
-                            <% _.forEach(homeworks, (homework) => { %>
-                                <li class="list-group-item d-flex justify-content-between align-items-center text-capitalize">
-                                    <a href="/visit/<%= homework._id %>" target = "_blank" style = "font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif"><%= homework.title %></a>
-                                    <span class = "pull-right ml-2"> <a href="<%= homework.link %>"><i class="fi-cwsuxl-check" style = "color: #007bff" title="verified"></i></a></span>
-                                </li>
-                            <% }) %>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                  <a href="/links/1" style = "color: #000">More</a>
-                                  <span class = "pull-right"><i class = "fa fa-arrow-right"></i></span>
-                                </li>
-                        </ul> 
-                        <ul class="list-group mb-4">
-                                <li class="list-group-item bg-primary" style = "color: #fff"><i class="fa fa-line-chart" aria-hidden="true"></i> Books</li>
-                            <% _.forEach(books, (book) => { %>
-                                <li class="list-group-item d-flex justify-content-between align-items-center text-capitalize">
-                                    <a href="/visit/<%= book._id %>" target = "_blank" style = "font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif"><%= book.title %></a>
-                                    <span class = "pull-right ml-2"> <a href="<%= book.link %>"><i class="fi-cwsuxl-check" style = "color: #007bff" title="verified"></i></a></span>
-                                </li>
-                            <% }) %>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                  <a href="/links/1" style = "color: #000">More</a>
-                                  <span class = "pull-right"><i class = "fa fa-arrow-right"></i></span>
-                                </li>
-                        </ul> 
-                        <iframe width="100%" height = "250px;" class = "mb-3" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
+                        <div class = "col-md-5">
+                          <% if(!(dailys.length == 0)){ %>
+                            <div id="accordion" style = "margin-bottom: 20px;">
+                              <div class="bg-primary" style = "margin-bottom: -15px;">
+                                  <p class="list-group-item bg-primary" style = "color: #fff"><i class="fa fa-line-chart" aria-hidden="true"></i> Daily Uploads<span class = "pull-right"><a href="/links/1/" style = "color: #fff">More <i class = "fa fa-arrow-right"></i></a></span></p>
+                              </div>
+                              <% _.forEach(dailys, (daily, index) => { %>
+                                <div class="card" style = "border-top:0">
+                                  <div class="card-header">
+                                        <a class="card-link" data-toggle="collapse" href="#m<%= daily._id %>">
+                                          <%= daily.title %>
+                                        </a>
+                                  </div>
+                                  <div id="m<%= daily._id %>" class="collapse" data-parent="#accordion">
+                                    <div class="card-body">
+                                     <% if(daily.owner){ %>
+                                      By-<%= daily.owner %> <span class = "badge badge-primary pull-right">opened by <%= daily.visits %></span>
+                                     <% }else{ %>
+                                      by-Anonymous <span class = "badge badge-primary pull-right">opened by <%= daily.visits %></span>
+                                    <% } %>
+                                     <% if(daily.section){ %>
+                                      <p>for Section <%= daily.section %></p>
+                                     <% } %>
+                                     <% if(daily.desc){ %>
+                                      <p><%= daily.desc %></p>
+                                     <% }else{ %>
+                                      <p>No extra info available for this document</p>
+                                     <% } %>
+                                     <span><a href = "<%= daily.link %>" target = "_blank">Click here to open document</a></span>
+                                     <div class = "row">
+                                       <div class = "col-12"></div>
+                                     </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              <% }) %>
+                            </div>
+                          <% } %>
+                          <% if(!(homeworks.length == 0)){ %>
+                            <div id="accordion" style = "margin-bottom: 20px;">
+                              <div class="bg-primary" style = "margin-bottom: -15px;">
+                                  <p class="list-group-item bg-primary" style = "color: #fff"><i class="fa fa-line-chart" aria-hidden="true"></i> Latest Assignments Solution <span class = "pull-right"><a href="/links/1/" style = "color: #fff">More <i class = "fa fa-arrow-right"></i></a></span></p>
+                              </div>
+                              <% _.forEach(homeworks, (homework, index) => { %>
+                                <div class="card" style = "border-top:0">
+                                  <div class="card-header">
+                                        <a class="card-link" data-toggle="collapse" href="#m<%= homework._id %>">
+                                          <%= homework.title %>
+                                        </a>
+                                  </div>
+                                  <div id="m<%= homework._id %>" class="collapse" data-parent="#accordion">
+                                    <div class="card-body">
+                                      <% if(homework.owner){ %>
+                                        By-<%= homework.owner %> <span class = "badge badge-primary pull-right">opened by <%= homework.visits %></span>
+                                       <% }else{ %>
+                                        by-Anonymous <span class = "badge badge-primary pull-right">opened by <%= homework.visits %></span>
+                                      <% } %>
+                                     <% if(homework.section){ %>
+                                      <p>for Section J</p>
+                                     <% } %>
+                                     <% if(homework.desc){ %>
+                                      <p><%= homework.desc %></p>
+                                     <% }else{ %>
+                                      <p>No extra info available for this document</p>
+                                     <% } %>
+                                     <span><a href = "<%= homework.link %>" target = "_blank">Click here to open document</a></span>
+                                     <div class = "row">
+                                       <div class = "col-12"></div>
+                                     </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              <% }) %>
+                            </div>
+                          <% } %>
+                          <% if(!(books.length == 0)){ %>
+                            <div id="accordion">
+                              <div class="bg-primary" style = "margin-bottom: -15px;">
+                                  <p class="list-group-item bg-primary" style = "color: #fff"><i class="fa fa-line-chart" aria-hidden="true"></i> Books  <span class = "pull-right"><a href="/links/1/" style = "color: #fff">More <i class = "fa fa-arrow-right"></i></a></span></p>
+                              </div>
+                              <% _.forEach(books, (book, index) => { %>
+                                <div class="card" style = "border-top:0">
+                                  <div class="card-header">
+                                        <a class="card-link" data-toggle="collapse" href="#m<%= book._id %>">
+                                          <%= book.title %>
+                                        </a>
+                                  </div>
+                                  <div id="m<%= book._id %>" class="collapse" data-parent="#accordion">
+                                    <div class="card-body">
+                                      <% if(book.owner){ %>
+                                        By-<%= book.owner %> <span class = "badge badge-primary pull-right">opened by <%= book.visits %></span>
+                                       <% }else{ %>
+                                        by-Anonymous <span class = "badge badge-primary pull-right">opened by <%= book.visits %></span>
+                                      <% } %>
+                                     <% if(book.section){ %>
+                                      <p>for Section J</p>
+                                     <% } %>
+                                     <% if(book.desc){ %>
+                                      <p><%= book.desc %></p>
+                                     <% }else{ %>
+                                      <p>No extra info available for this document</p>
+                                     <% } %>
+                                     <span><a href = "<%= book.link %>" target = "_blank">Click here to open document</a></span>
+                                     <div class = "row">
+                                       <div class = "col-12"></div>
+                                     </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              <% }) %>
+                            </div>
+                          <% } %>
+                        <!-- <iframe width="100%" height = "250px;" class = "mb-3" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe> -->
                         <!-- <a href = "/upload" class = "text-lowercase">
                           <img class="img-fluid rounded mb-2" src="https://www.aavn.edu.vn/files/Contact%20Us_Workwithus.png" alt="">
                           <p class = "text-center">Click here to work with us and get a chance to get ranked on our website</p>

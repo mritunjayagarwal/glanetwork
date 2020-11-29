@@ -6,6 +6,7 @@ const linkSchema = new Schema({
     owner: { type: Schema.Types.ObjectId, ref: 'User'},
     section: String,
     title: { type: String, required: true},
+    desc: String,
     link: String,
     visits: { type: Number, default: 0},
     submitted: { type: Date, default: Date.now},
