@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const linkSchema = new Schema({
     ctgry: { type: String, default: 'daily'},
     owner: { type: Schema.Types.ObjectId, ref: 'User'},
+    oname: String,
     section: String,
     title: { type: String, required: true},
     desc: String,

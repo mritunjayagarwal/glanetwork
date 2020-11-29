@@ -16,6 +16,8 @@ module.exports = function(Link, User){
                 const newLink = new Link();
                 if(owner){
                     newLink.owner = oid;
+                }else{
+                    newLink.oname = req.body.owner;
                 }
                 newLink.title = req.body.title;
                 newLink.ctgry = req.body.category;
