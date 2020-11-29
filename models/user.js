@@ -25,6 +25,12 @@ const userSchema = new Schema({
             con: { type: Date, default: Date.now}
         }
     ],
+    docs: [
+        {
+            doc: { type: Schema.Types.ObjectId, ref: 'Link'},
+            don: { type: Date, default: Date.now}
+        }
+    ],
     created: { type: Date, default: Date.now}
 });
 

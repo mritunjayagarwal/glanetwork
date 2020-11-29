@@ -34,7 +34,8 @@ module.exports = function(News, User, Link, passport, moment){
                 var clength = req.user.comments.length;
                 var nlength = req.user.newses.length;
                 var llength = req.user.liked.length;
-                var points = Math.ceil((clength)*10 + (nlength)*20 + (llength)*5);
+                var dlength = req.user.docs.length;
+                var points = Math.ceil((clength)*20 + (nlength)*40 + (llength)*10 + (dlength)*50);
                 User.updateOne({
                     _id: req.user._id
                 }, {
@@ -46,15 +47,19 @@ module.exports = function(News, User, Link, passport, moment){
                 });
             }
             var ranks = await User.find({level: { $gte: 1}}).limit(10).sort("-level").exec();
+            var dailys = await Link.find({ ctgry: 'daily'}).limit(5).sort("-submitted").exec();
+            var homeworks = await Link.find({ ctgry: 'homework'}).limit(5).sort("-submitted").exec();
+            var books = await Link.find({ ctgry: 'book'}).limit(5).sort("-submitted").exec();
+            var idocs = await Link.find({ ctgry: 'idoc'}).limit(5).sort("-submitted").exec();
             News.find({}).skip((perPage * page) - perPage).limit(perPage).sort("-submitted").populate({ path: 'likes.owner', model: 'User'}).exec((err, news) => {
               News.countDocuments().exec((err, count) => {
-                res.render("index", { user: req.user, feeds: news, moment: moment, errors: errors, hasErrors: errors.length > 0, current: page,pages: Math.ceil(count / perPage), links: links, ranks: ranks});
+                res.render("index", { user: req.user, feeds: news, moment: moment, errors: errors, hasErrors: errors.length > 0, current: page,pages: Math.ceil(count / perPage), links: links, ranks: ranks, dailys: dailys, homeworks: homeworks, books: books, idocs: idocs});
               })  
             });
         },
         uploadNews: function(req, res){
             if(req.user){
-                res.render('upload');
+                res.render('upload', { user: req.user});
             }else{
                 res.redirect('/member/signup')
             }
@@ -187,7 +192,8 @@ module.exports = function(News, User, Link, passport, moment){
                 var clength = req.user.comments.length;
                 var nlength = req.user.newses.length;
                 var llength = req.user.liked.length;
-                var points = Math.ceil((clength)*10 + (nlength)*20 + (llength)*5);
+                var dlength = req.user.docs.length;
+                var points = Math.ceil((clength)*20 + (nlength)*40 + (llength)*10 + (dlength)*50);
                 User.updateOne({
                     _id: req.user._id
                 }, {
@@ -210,7 +216,8 @@ module.exports = function(News, User, Link, passport, moment){
                 var clength = req.user.comments.length;
                 var nlength = req.user.newses.length;
                 var llength = req.user.liked.length;
-                var points = Math.ceil((clength)*10 + (nlength)*20 + (llength)*5);
+                var dlength = req.user.docs.length;
+                var points = Math.ceil((clength)*20 + (nlength)*40 + (llength)*10 + (dlength)*50);
                 User.updateOne({
                     _id: req.user._id
                 }, {

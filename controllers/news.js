@@ -17,7 +17,8 @@ module.exports = function(News, Comment, moment, User, Link){
                 var clength = req.user.comments.length;
                 var nlength = req.user.newses.length;
                 var llength = req.user.liked.length;
-                var points = Math.ceil((clength)*10 + (nlength)*20 + (llength)*5);
+                var dlength = req.user.docs.length;
+                var points = Math.ceil((clength)*20 + (nlength)*40 + (llength)*10 + (dlength)*50);
                 User.updateOne({
                     _id: req.user._id
                 }, {
