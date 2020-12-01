@@ -10,16 +10,11 @@ module.exports = function(Link, User){
         uploadlink: async function(req, res){
             if(req.user){
                 var owner = await User.findOne({ username: req.body.owner}).exec();
-                if(owner){
-                    oid = owner._id;
-                }
                 const newLink = new Link();
-                if(owner){
-                    newLink.owner = oid;
-                }else{
-                    newLink.oname = req.body.owner;
-                }
                 newLink.title = req.body.title;
+                if(req.body.owner){
+                    newLink.owner = req.body.owner;
+                }                
                 newLink.ctgry = req.body.category;
                 if(req.body.section){
                     newLink.section = req.body.section;
