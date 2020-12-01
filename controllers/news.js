@@ -33,13 +33,13 @@ module.exports = function(News, Comment, moment, User, Link){
             var links = await Link.find({}).limit(10).sort("-submitted").exec();
             var dailys = await Link.find({ ctgry: 'daily'}).limit(4).sort("-submitted").exec();
             var homeworks = await Link.find({ ctgry: 'homework'}).limit(4).sort("-submitted").exec();
-            var books = await Link.find({ ctgry: 'book'}).limit(4).sort("-submitted").populate({ path: 'owner', model: 'User'}).exec();
+            var books = await Link.find({ ctgry: 'book'}).limit(4).sort("-submitted").exec();
             var idocs = await Link.find({ ctgry: 'idoc'}).limit(4).sort("-submitted").exec();
             var ccs = await Link.find({ ctgry: 'cc'}).limit(4).sort("-submitted").exec();
             const news = await News.findOne({ _id: req.params.id}).populate({ path: 'comments.comment', model: 'Comment'}).exec();
             const comments = await Comment.find({ news: req.params.id}).populate({ path: 'owner', model: 'User'}).exec();
             var errors = req.flash('error');
-            res.render('news', { user: req.user, errors: errors, hasErrors: errors.length > 0, news: news, moment: moment, comments: comments, ranks: ranks, links: links});
+            res.render('news', { user: req.user, errors: errors, hasErrors: errors.length > 0, news: news, moment: moment, comments: comments, ranks: ranks, links: links, dailys: dailys, homeworks: homeworks, books: books, ccs: ccs, idocs: idocs});
         },
         newsComment: async function(req, res){
 
