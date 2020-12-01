@@ -161,10 +161,11 @@ module.exports = function(News, User, Link, passport, moment){
             });
         },
         signup: function(req, res){
+            var errors = req.flash('error');
             if(req.user){
                 res.redirect('/home/1/')
             }else{
-                res.render('signup')
+                res.render('signup',  { errors: errors, hasErrors: errors.length > 0})
             }
         },
         createAccount: passport.authenticate('local.signup', {
@@ -182,10 +183,11 @@ module.exports = function(News, User, Link, passport, moment){
             res.redirect('/');
         },
         authenticate: function(req, res){
+            var errors = req.flash('error');
             if(req.user){
                 res.redirect('/home/1/')
             }else{
-                res.render('authenticate')
+                res.render('authenticate', { errors: errors, hasErrors: errors.length > 0})
             }
         },
         whoweare: async function(req, res){

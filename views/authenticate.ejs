@@ -26,6 +26,14 @@
             </div>
           </div>
           <div class="col-md-8 col-lg-6">
+            <% if(hasErrors){ %>
+              <% _.forEach(errors, (error) => { %>
+                <div class = "alert alert-danger text-center">
+                    <a href = "#" class = "close" data-dismiss = "alert" aria-label="close">&times;</a>
+                <%= error %>
+                </div>
+              <% }) %>
+            <% } %>
             <h3 class="login-heading text-center" style = "font-weight: bold">Gla network</h3>
             <div class="login d-flex align-items-center py-5">
               <div class="container">
