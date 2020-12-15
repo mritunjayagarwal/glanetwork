@@ -18,12 +18,15 @@ module.exports = function(News, Comment, moment, User, Link){
                 var nlength = req.user.newses.length;
                 var llength = req.user.liked.length;
                 var dlength = req.user.docs.length;
-                var points = Math.ceil((clength)*20 + (nlength)*40 + (llength)*10 + (dlength)*50);
+                var points = Math.ceil((clength)*20 + (nlength)*40 + (llength)*10 + (dlength)*50 + (req.user.viewsgiven)*5);
                 User.updateOne({
                     _id: req.user._id
                 }, {
                     $set: {
                         level: points
+                    },
+                    $inc: {
+                        viewsgiven: +1
                     }
                 }, (err) => {
                     if(err) console.log(err);
