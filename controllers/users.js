@@ -10,7 +10,8 @@ module.exports = function(News, User, Link, passport, moment){
             router.get('/authenticate', this.authenticate);
             router.get('/whoweare', this.whoweare);
             router.get('/links/:page', this.links);
-            router.get('/member/signup/', this.signup)
+            router.get('/member/signup/', this.signup);
+            router.get('/exam/:page', this.examweek);
 
             router.post('/upload', this.upload);
             router.post('/create', this.createAccount);
@@ -235,6 +236,33 @@ module.exports = function(News, User, Link, passport, moment){
             Link.find({}).skip((perPage * page) - perPage).limit(perPage).sort("-submitted").exec((err, links) => {
                 Link.countDocuments().exec((err, count) => {
                     res.render('links', {user: req.user, errors: errors, hasErrors: errors.length > 0, links: links, moment: moment, current: page,pages: Math.ceil(count / perPage), ranks: ranks});
+                })
+            });
+        },
+        examweek: async function(req, res){
+            var perPage = 9;
+            var page = req.params.page || 1;
+            var errors = req.flash('error');
+            if(req.user){
+                var clength = req.user.comments.length;
+                var nlength = req.user.newses.length;
+                var llength = req.user.liked.length;
+                var dlength = req.user.docs.length;
+                var points = Math.ceil((clength)*20 + (nlength)*40 + (llength)*10 + (dlength)*50);
+                User.updateOne({
+                    _id: req.user._id
+                }, {
+                    $set: {
+                        level: points
+                    }
+                }, (err) => {
+                    if(err) console.log(err);
+                });
+            }
+            var ranks = await User.find({level: { $gte: 1}}).limit(10).sort("-level").exec();
+            Link.find({ctgry: 'exam'}).skip((perPage * page) - perPage).limit(perPage).sort("-submitted").exec((err, links) => {
+                Link.countDocuments().exec((err, count) => {
+                    res.render('examweek', {user: req.user, errors: errors, hasErrors: errors.length > 0, links: links, moment: moment, current: page,pages: Math.ceil(count / perPage), ranks: ranks});
                 })
             });
         }

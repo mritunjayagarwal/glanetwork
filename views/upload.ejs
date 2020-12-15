@@ -26,6 +26,7 @@
         <form action="/uploadlink" method = "POST">
             <label for="typecat">Enter Category</label>
             <select name="category" id="typecat" required>
+                <option value="exam">Exam Week</option>
                 <option value="daily">Daily Notes</option>
                 <option value="homework">Homework</option>
                 <option value="book">Book</option>
@@ -42,6 +43,8 @@
             <input type="text" name = "owner" placeholder = "Submitted By" id = "owner" value = "<%= user.username %>"><br><br>
             <label for="section">For Section:</label>
             <input type="text" name = "section" placeholder = "section" id = "section"><br><br>
+            <label for="subject">Subject:</label>
+            <input type="text" name = "subject" placeholder = "subject" id = "subject"><br><br>
             <input type="submit" value = "Submit PDF">
         </form>
     </div>

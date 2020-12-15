@@ -6,6 +6,7 @@ const linkSchema = new Schema({
     owner: String,
     oname: String,
     section: String,
+    subject: String,
     title: { type: String, required: true},
     desc: String,
     link: String,

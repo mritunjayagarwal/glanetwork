@@ -14,7 +14,10 @@ module.exports = function(Link, User){
                 newLink.title = req.body.title;
                 if(req.body.owner){
                     newLink.owner = req.body.owner;
-                }                
+                }
+                if(req.body.subject){
+                    newLink.subject = req.body.subject;
+                }            
                 newLink.ctgry = req.body.category;
                 if(req.body.section){
                     newLink.section = req.body.section;
