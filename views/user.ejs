@@ -43,7 +43,7 @@
                                         <div class="profiles p-3 my-4 rounded text-center">
                                                 <div class="avatars">
                                                     <a href="setting.html">
-                                                        <img src="https://demo.bootstrap.news/bootnews/assets/img/avatar/avatar1.png" alt="Circle Image" class="avatar-lg rounded-circle img-fluid" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Edit avatar images">
+                                                        <img src="https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png" style = "width: 100px;height: auto;" alt="Circle Image" class="avatar-lg rounded-circle img-fluid" data-toggle="tooltip" data-placement="bottom" title="<%= vuser.username %>" data-original-title="Edit avatar images">
                                                     </a>
                                                 </div>
                                                 <div class="names">
@@ -73,12 +73,12 @@
                         <div class = "row mt-3">
                             <div class = "col-sm-6">
                                 <ul class="list-group">
-                                    <li class="list-group-item text-muted bg-dark text-default text-center" contenteditable="false">❤️ Basic Information</li>
-                                    <li class="list-group-item text-right bg-dark text-light"><span class="pull-left"><strong>Full Name</strong></span>Mritunjay Agarwal</li>
+                                    <li class="list-group-item text-muted bg-dark text-default text-center" contenteditable="false">Basic Information</li>
+                                    <li class="list-group-item text-right bg-dark text-light"><span class="pull-left"><strong>Username</strong></span><%= vuser.username %></li>
                                     <li class="list-group-item text-right bg-dark text-light"><span class="pull-left"><strong>Joined</strong></span><%= moment(user.created).format("LL") %></li>
                                 </ul>
                                 <ul class="list-group mt-3">
-                                    <li class="list-group-item text-muted bg-dark text-default text-center" contenteditable="false">🏆 Uploads</li>
+                                    <li class="list-group-item text-muted bg-dark text-default text-center" contenteditable="false">Uploads</li>
                                     <li class="list-group-item text-right bg-dark text-light"><span class="pull-left"><strong>News Uploaded</strong></span><%= vuser.newses.length %></li>
                                     <li class="list-group-item text-right bg-dark text-light"><span class="pull-left"><strong>Documents Uploaded</strong></span><%= vuser.docs.length %></li>
                                     <!-- <li class="list-group-item text-right bg-dark text-light"><span class="pull-left"><strong>Level</strong></span><%= vuser.level %></li> -->
@@ -86,12 +86,12 @@
                             </div>
                             <div class = "col-sm-6 ">
                                 <ul class="list-group">
-                                    <li class="list-group-item text-muted bg-dark text-default text-center" contenteditable="false">❤️ Contribution</li>
+                                    <li class="list-group-item text-muted bg-dark text-default text-center" contenteditable="false">Contribution</li>
                                     <li class="list-group-item text-right bg-dark text-light"><span class="pull-left"><strong>Views Given</strong></span><%= vuser.viewsgiven %></li>
                                     <li class="list-group-item text-right bg-dark text-light"><span class="pull-left"><strong>Likes Given</strong></span><%= vuser.liked.length %></li>
                                 </ul>
                                 <ul class="list-group mt-3">
-                                    <li class="list-group-item text-muted bg-dark text-default text-center" contenteditable="false">🏆 Achievements</li>
+                                    <li class="list-group-item text-muted bg-dark text-default text-center" contenteditable="false">Achievements</li>
                                     <li class="list-group-item text-right bg-dark text-light"><span class="pull-left"><strong>Level</strong></span><%= level %></li>
                                     <li class="list-group-item text-right bg-dark text-light"><span class="pull-left"><strong>Total Points</strong></span><%= vuser.level %></li>
                                 </ul>
