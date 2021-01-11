@@ -12,6 +12,7 @@ module.exports = function(News, User, Link, passport, moment){
             router.get('/links/:page', this.links);
             router.get('/member/signup/', this.signup);
             router.get('/exam/:page', this.examweek);
+            router.get('/user/:id', this.profilepage);
 
             router.post('/upload', this.upload);
             router.post('/create', this.createAccount);
@@ -58,6 +59,33 @@ module.exports = function(News, User, Link, passport, moment){
                 res.render("index", { user: req.user, feeds: news, moment: moment, errors: errors, hasErrors: errors.length > 0, current: page,pages: Math.ceil(count / perPage), links: links, ranks: ranks, dailys: dailys, homeworks: homeworks, books: books, idocs: idocs, ccs: ccs});
               })  
             });
+        },
+        profilepage: async function(req, res){
+            var errors = req.flash('error');
+            if(req.user){
+                var clength = req.user.comments.length;
+                var nlength = req.user.newses.length;
+                var llength = req.user.liked.length;
+                var dlength = req.user.docs.length;
+                var points = Math.ceil((clength)*20 + (nlength)*40 + (llength)*10 + (dlength)*50 + (req.user.viewsgiven)*5);
+                User.updateOne({
+                    _id: req.user._id
+                }, {
+                    $set: {
+                        level: points
+                    }
+                }, (err) => {
+                    if(err) console.log(err);
+                });
+            }
+            var ranks = await User.find({level: { $gte: 1}}).limit(10).sort("-level").exec();
+            User.findOne({ _id: req.params.id}).exec((err, user) => {
+                if(user){
+                        res.render('user', {user: req.user, vuser: user, errors: errors, hasErrors: errors.length > 0, ranks: ranks, moment: moment, level: Math.floor((user.level)/18)})
+                }else{
+                    res.redirect('/home/1')
+                }
+            })
         },
         uploadNews: function(req, res){
             if(req.user){
