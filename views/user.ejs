@@ -73,12 +73,12 @@
                         <div class = "row mt-3">
                             <div class = "col-sm-6">
                                 <ul class="list-group">
-                                    <li class="list-group-item text-muted bg-dark text-default text-center" contenteditable="false">Basic Information</li>
+                                    <li class="list-group-item text-muted bg-dark text-center" contenteditable="false"><span style = "color: #fff">Basic Information</span></li>
                                     <li class="list-group-item text-right bg-dark text-light"><span class="pull-left"><strong>Username</strong></span><%= vuser.username %></li>
                                     <li class="list-group-item text-right bg-dark text-light"><span class="pull-left"><strong>Joined</strong></span><%= moment(user.created).format("LL") %></li>
                                 </ul>
                                 <ul class="list-group mt-3 mb-3">
-                                    <li class="list-group-item text-muted bg-dark text-default text-center" contenteditable="false">Uploads</li>
+                                    <li class="list-group-item text-muted bg-dark text-default text-center" contenteditable="false"><span style = "color: #fff">Uploads</span></li>
                                     <li class="list-group-item text-right bg-dark text-light"><span class="pull-left"><strong>News Uploaded</strong></span><%= vuser.newses.length %></li>
                                     <li class="list-group-item text-right bg-dark text-light"><span class="pull-left"><strong>Documents Uploaded</strong></span><%= vuser.docs.length %></li>
                                     <!-- <li class="list-group-item text-right bg-dark text-light"><span class="pull-left"><strong>Level</strong></span><%= vuser.level %></li> -->
@@ -86,12 +86,12 @@
                             </div>
                             <div class = "col-sm-6 ">
                                 <ul class="list-group">
-                                    <li class="list-group-item text-muted bg-dark text-default text-center" contenteditable="false">Contribution</li>
+                                    <li class="list-group-item text-muted bg-dark text-default text-center" contenteditable="false"><span style = "color: #fff">Contribution</span></li>
                                     <li class="list-group-item text-right bg-dark text-light"><span class="pull-left"><strong>Views Given</strong></span><%= vuser.viewsgiven %></li>
                                     <li class="list-group-item text-right bg-dark text-light"><span class="pull-left"><strong>Likes Given</strong></span><%= vuser.liked.length %></li>
                                 </ul>
                                 <ul class="list-group mt-3">
-                                    <li class="list-group-item text-muted bg-dark text-default text-center" contenteditable="false">Achievements</li>
+                                    <li class="list-group-item text-muted bg-dark text-default text-center" contenteditable="false"><span style = "color: #fff">Achievements</span></li>
                                     <li class="list-group-item text-right bg-dark text-light"><span class="pull-left"><strong>Level</strong></span><%= level %></li>
                                     <li class="list-group-item text-right bg-dark text-light"><span class="pull-left"><strong>Total Points</strong></span><%= vuser.level %></li>
                                 </ul>
