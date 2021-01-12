@@ -28,7 +28,7 @@
           <%- include("./partials/header.ejs") %>
           <%- include("./partials/sidebar.ejs") %>
           
-            <div class="content-wrapper">
+            <div class="content-wrapper" style = "background: #0E0E10">
                 <% if(hasErrors){ %>
                   <% _.forEach(errors, (error) => { %>
                     <div class = "alert alert-danger text-center">
@@ -37,30 +37,23 @@
                     </div>
                   <% }) %>
                 <% } %>
-                <section class="content" style = "background: #fff;">
+                <section class="content">
                     <div class="row" style = "margin-top: -15px;">
 
                         <!-- Post Content Column -->
                         <div class="col-lg-8">
                   
                           <!-- Title -->
-                          <h1 class="mt-4 text-uppercase" style = "font-size: 28px;"><%= news.title %></h1>
-                          
-                          <!-- Author -->
-                          <p class="lead">
+                          <div style = "border-left: 5px solid #007bff;padding-left: 10px;">
+                            <h1 class="mt-4 text-uppercase" style = "font-size: 28px;color: #d3d3d3"><%= news.title %></h1>
+                          </div>
+                          <p class="lead" style = "color: #737373">
                             by
-                            <strong>Almighty99  <span class = "pull-right text-lowercase" style = "font-size: 20px;"><%= news.views %> views</span></strong>
+                            <strong>Almighty99  <span class = "pull-right text-lowercase" style = "font-size: 20px;color: #e3e3e3"><%= news.views %> views</span></strong>
                           </p>
-
-                          <hr>
-                  
-                          <!-- Date/Time -->
-                          <p><%= moment(news.submitted).format('MMMM Do YYYY') %><span class = "pull-right"><%= moment(news.submitted).fromNow() %></span></p>
-                  
+                          <p style = "color: #d3d3d3"><%= moment(news.submitted).format('MMMM Do YYYY') %><span class = "pull-right"><%= moment(news.submitted).fromNow() %></span></p>
                           <!-- Post Content -->
-                          <p style = "font-size: 20px;white-space: pre-line;white-space: pre-wrap;"><%= news.content %></p>
-
-                          <center><hr width = 250></center>
+                          <p style = "color: #d3d3d3;font-size: 20px;white-space: pre-line;white-space: pre-wrap;background: #131313;padding:10px;" ><%= news.content %></p>
 
                             <div>
                               <form action = "/comment/news/<%= news._id %>" method = "POST">
@@ -90,19 +83,19 @@
                         <!-- Sidebar Widgets Column -->
                         <div class="col-md-4">
                           <% if(!(dailys.length == 0)){ %>
-                            <div id="accordion" style = "margin-bottom: 20px;margin-top: 25px;">
-                              <div class="bg-primary" style = "margin-bottom: -15px;">
-                                  <p class="list-group-item bg-primary" style = "color: #fff"><i class="fa fa-line-chart" aria-hidden="true"></i> Daily Uploads<span class = "pull-right"><a href="/links/1/" style = "color: #fff">More <i class = "fa fa-arrow-right"></i></a></span></p>
+                            <div id="accordion" class = "mt-4" style = "margin-bottom: 20px;">
+                              <div style = "margin-bottom: -15px;">
+                                  <p class="list-group-item bg-dark" style = "color: #fff"><i class="fa fa-line-chart" aria-hidden="true"></i> Daily Uploads<span class = "pull-right"><a href="/links/1/" style = "color: #fff">More <i class = "fa fa-arrow-right"></i></a></span></p>
                               </div>
                               <% _.forEach(dailys, (daily, index) => { %>
-                                <div class="card" style = "border-top:0">
+                                <div class="card" style = "background: #181818;border-top:0">
                                   <div class="card-header">
-                                        <a class="card-link" data-toggle="collapse" href="#m<%= daily._id %>">
+                                        <a class="card-link" data-toggle="collapse" href="#m<%= daily._id %>" style = "color: #d3d3d3">
                                           <%= daily.title %>
                                         </a>
                                   </div>
                                   <div id="m<%= daily._id %>" class="collapse" data-parent="#accordion">
-                                    <div class="card-body">
+                                    <div class="card-body" style = "color: #d3d3d3">
                                      <% if(daily.owner){ %>
                                       By-<%= daily.owner %> <span class = "badge badge-primary pull-right">opened by <%= daily.visits %></span>
                                      <% }else{ %>
@@ -128,25 +121,25 @@
                           <% } %>
                           <% if(!(homeworks.length == 0)){ %>
                             <div id="accordion" style = "margin-bottom: 20px;">
-                              <div class="bg-primary" style = "margin-bottom: -15px;">
-                                  <p class="list-group-item bg-primary" style = "color: #fff"><i class="fa fa-line-chart" aria-hidden="true"></i> Latest Assignments Solution <span class = "pull-right"><a href="/links/1/" style = "color: #fff">More <i class = "fa fa-arrow-right"></i></a></span></p>
+                              <div style = "margin-bottom: -15px;">
+                                  <p class="list-group-item bg-dark" style = "color: #fff"><i class="fa fa-line-chart" aria-hidden="true"></i> Latest Assignments Solution <span class = "pull-right"><a href="/links/1/" style = "color: #fff">More <i class = "fa fa-arrow-right"></i></a></span></p>
                               </div>
                               <% _.forEach(homeworks, (homework, index) => { %>
-                                <div class="card" style = "border-top:0">
+                                <div class="card" style = "background: #181818;border-top:0">
                                   <div class="card-header">
-                                        <a class="card-link" data-toggle="collapse" href="#m<%= homework._id %>">
+                                        <a class="card-link" data-toggle="collapse" href="#m<%= homework._id %>" style = "color: #d3d3d3">
                                           <%= homework.title %>
                                         </a>
                                   </div>
                                   <div id="m<%= homework._id %>" class="collapse" data-parent="#accordion">
-                                    <div class="card-body">
+                                    <div class="card-body" style = "color: #d3d3d3">
                                       <% if(homework.owner){ %>
                                         By-<%= homework.owner %> <span class = "badge badge-primary pull-right">opened by <%= homework.visits %></span>
                                        <% }else{ %>
                                         by-Anonymous <span class = "badge badge-primary pull-right">opened by <%= homework.visits %></span>
                                       <% } %>
                                      <% if(homework.section){ %>
-                                      <p>for Section J</p>
+                                      <p>for Section <%= homework.section %></p>
                                      <% } %>
                                      <% if(homework.desc){ %>
                                       <p><%= homework.desc %></p>
@@ -165,25 +158,25 @@
                           <% } %>
                           <% if(!(books.length == 0)){ %>
                             <div id="accordion">
-                              <div class="bg-primary" style = "margin-bottom: -15px;">
-                                  <p class="list-group-item bg-primary" style = "color: #fff"><i class="fa fa-line-chart" aria-hidden="true"></i> Books  <span class = "pull-right"><a href="/links/1/" style = "color: #fff">More <i class = "fa fa-arrow-right"></i></a></span></p>
+                              <div style = "margin-bottom: -15px;">
+                                  <p class="list-group-item bg-dark" style = "color: #fff"><i class="fa fa-line-chart" aria-hidden="true"></i> Books  <span class = "pull-right"><a href="/links/1/" style = "color: #fff">More <i class = "fa fa-arrow-right"></i></a></span></p>
                               </div>
                               <% _.forEach(books, (book, index) => { %>
-                                <div class="card" style = "border-top:0">
+                                <div class="card" style = "background: #181818;border-top:0">
                                   <div class="card-header">
-                                        <a class="card-link" data-toggle="collapse" href="#m<%= book._id %>">
+                                        <a class="card-link" data-toggle="collapse" href="#m<%= book._id %>" style = "color: #d3d3d3">
                                           <%= book.title %>
                                         </a>
                                   </div>
                                   <div id="m<%= book._id %>" class="collapse" data-parent="#accordion">
-                                    <div class="card-body">
+                                    <div class="card-body" style = "color: #d3d3d3">
                                       <% if(book.owner){ %>
                                         By-<%= book.owner %> <span class = "badge badge-primary pull-right">opened by <%= book.visits %></span>
                                        <% }else{ %>
                                         by-Anonymous <span class = "badge badge-primary pull-right">opened by <%= book.visits %></span>
                                       <% } %>
                                      <% if(book.section){ %>
-                                      <p>for Section J</p>
+                                      <p>for Section <%= book.section %></p>
                                      <% } %>
                                      <% if(book.desc){ %>
                                       <p><%= book.desc %></p>
