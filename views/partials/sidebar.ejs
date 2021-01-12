@@ -8,7 +8,7 @@
            <% } %>
             <li class="header mt-2 text-center text-uppercase" style = "color: #d3d3d3;font-size: 15px;background: #303030">Top contributors</li>
             <% _.forEach(ranks, (rank) => { %>
-                <li><a href="/user/<%= rank._id %>"><img class="mr-2 rounded-circle" src="https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png" alt="" style = "width: 20px;height: auto;"><span><%= rank.username %></span> <span class = "badge badge-primary badge-pill pull-right">+ <%= rank.level %></span></a></li>
+                <li><a href="/user/<%= rank._id %>" style = "color: #fff"><img class="mr-2 rounded-circle" src="https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png" alt="" style = "width: 20px;height: auto;"><span><%= rank.username %></span> <span class = "badge badge-primary badge-pill pull-right">+ <%= rank.level %></span></a></li>
             <% }) %>
             <li class="header mt-2 text-center text-uppercase" style = "color: #d3d3d3;font-size: 15px;">Should also visit</li>
             <li><a href="/links/1"><i class="fa fa-link"></i> <span>Homework and Notes</span></a></li>

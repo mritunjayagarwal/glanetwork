@@ -30,7 +30,7 @@
           <%- include("./partials/header.ejs") %>
           <%- include("./partials/sidebar.ejs") %>
           
-            <div class="content-wrapper">
+            <div class="content-wrapper" style = "background: #0E0E10">
                 <% if(hasErrors){ %>
                   <% _.forEach(errors, (error) => { %>
                     <div class = "alert alert-danger text-center">
@@ -40,17 +40,17 @@
                   <% }) %>
                 <% } %>
                 <section class="content">
-                    <h1 class = "h3 mb-3" style = "font-weight:bolder">NOTES AND HOMEWORKS</h1>
+                    <h1 class = "h3 mb-3" style = "font-weight:bolder;color: #fff">NOTES AND HOMEWORKS</h1>
                     <div class = "row">
                         <% _.forEach(links, (link) => { %>
                             <div class = "col-sm-12 col-md-6 col-lg-4">
-                                <div class="card mb-3 visitlink">
-                                    <div class="no-border text-uppercase px-3 pt-3" style = "color: #303030;font-size: 16px;font-family: Arial, Helvetica, sans-serif;font-weight: bold"><%= link.title %></div>
-                                    <span class = "pull-left no-border px-3 pb-0 mt-2" style = "color: #505050; font-weight: bolder; font-size: 12px;"><i class = "fa fa-clock"></i> <%= moment(link.submitted).format("lll") %></span>
+                                <div class="card mb-3 visitlink" style = "background: #181818;min-height: 200px;">
+                                    <div class="no-border text-uppercase px-3 pt-3" style = "color: #e3e3e3;font-size: 16px;font-family: Arial, Helvetica, sans-serif;font-weight: bold"><%= link.title %></div>
+                                    <span class = "pull-left no-border px-3 pb-0 mt-2" style = "color: #d3d3d3; font-weight: bolder; font-size: 12px;"><i class = "fa fa-clock"></i> <%= moment(link.submitted).format("lll") %></span>
                                     <div class="card-body">
                                     </div>
                                     <a href="<%= link.link %>" target = "_blank">
-                                        <div class = "card-footer clicklink bg-primary" style = "color: #fff">
+                                        <div class = "card-footer clicklink bg-dark" style = "color: #fff">
                                             Click here to visit
                                         </div>
                                     </a>    
