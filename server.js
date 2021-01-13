@@ -14,7 +14,7 @@ const passport = require('passport');
 const container = require("./container");
 const news = require('./controllers/news');
 
-container.resolve(function(users, news, upload, _){
+container.resolve(function(users, news, upload, tbh, _){
 
     const app = showExpress();
 
@@ -36,6 +36,7 @@ container.resolve(function(users, news, upload, _){
         users.SetRouting(router);
         news.SetRouting(router);
         upload.SetRouting(router);
+        tbh.SetRouting(router);
 
         app.use(router);
 
